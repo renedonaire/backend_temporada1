@@ -1,43 +1,55 @@
-class Usuario {
-    constructor(nombre, apellido, libros, mascotas) { 
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.libros = libros;
-        this.mascotas = mascotas;
+const fs = require('fs')
+
+class Products {
+    
+    constructor(fileName) {
+        this.route = fileName
     }
 
-    getFullName() {
-        return this.nombre + ' ' + this.apellido
+
+    getAll = async () => {
+        try {
+            const result = await fs.promises.readFile(this.route, 'utf-8')
+            return JSON.parse(result)
+
+        } catch (err) {
+            await fs.promises.writeFile(this.route, JSON.stringify([], null, 2))
+            const result = await fs.promises.readFile(this.route, 'utf-8')
+            return JSON.parse(result)
+        }
     }
 
-    addMascota(mascota) {
-        this.mascotas.push(mascota)
+
+    saveProduct = async product => {
+        const arrayProducts = await this.getAll()
+
+        try {
+            let indexArray = []
+            arrayProducts.forEach(element => indexArray.push(element.id))
+            if (indexArray.length>0) {
+                const arraySorted = indexArray.sort((a, b) => (b - a))
+                product.id = arraySorted[0] + 1
+                arrayProducts.push(product)
+            } else {
+                product.id = 1
+                arrayProducts.push(product)
+            }
+            await fs.promises.writeFile(this.route, JSON.stringify(arrayProducts, null, 2))
+            return product.id
+
+        } catch (err) {
+            console.log('Error: ', err)
+        }
     }
 
-    countMascotas() {
-        return this.mascotas.length
-    }
-
-    addBook(libro, autor) {
-        this.libros.push({"libro":libro, "autor":autor})
-    }
-
-    getBookNames() {
-        return this.libros.map(e => e.libro)
-    }
 }
 
 
-const usuario1 = new Usuario("rene", "donaire", [], ["perro", "gato"])
+const test = async () => {
+    const testFile = new Products('myFile')
+    console.log(await testFile.getAll())
+    console.log(await testFile.saveProduct({ nombre: 'Wilmar', email: 'wilmar@wmail.wom' }))
+    console.log(await testFile.getAll())
+}
 
-console.log(usuario1)
-console.log(usuario1.getFullName())
-
-usuario1.addMascota("pez")
-console.log(usuario1.mascotas)
-
-console.log(usuario1.countMascotas())
-
-usuario1.addBook("Mi primer libro", "Autor 1")
-usuario1.addBook("Segundo libro", "Autor 2")
-console.log(usuario1.getBookNames())
+test()
