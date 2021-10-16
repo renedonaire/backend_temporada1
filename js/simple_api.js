@@ -1,50 +1,40 @@
 const express = require('express')
 const app = express()
-const frase = "Hola mundo cómo están"
+app.use(express.json())
 
+const palabras = ['Frase', 'inicial']
 
 app.get('/api/frase', (req, res) => {
-    res.json({ frase })
+    res.json({ frase: palabras.join(' ') })
 })
 
-
-app.get('/api/letras/:num', (req, res) => {
-    const num = parseInt(req.params.num)
-
-    if (isNaN(num)) {
-        return res.json({ error: "El parámetro debe ser un número" })
-    }
-
-    if (num < 1 || num > frase.length) {
-        return res.json({ error: "El parámetro está fuera de rango" })
-    }
-
-    res.json({ letra: frase[num - 1] })
+app.get('/api/palabras/:pos', (req, res) => {
+    const { pos } = req.params
+    res.json({ buscada: palabras[parseInt(pos) - 1] })
 })
 
-
-app.get('/api/palabras/:num', (req, res) => {
-    const num = parseInt(req.params.num)
-    const palabras = frase.split(' ')
-
-
-    if (isNaN(num)) {
-        return res.json({ error: "El parámetro debe ser un número" })
-    }
-
-
-    if (num < 1 || num > palabras.length) {
-        return res.json({ error: "El parámetro está fuera de rango" })
-    }
-
-    res.json({ palabra: palabras[num - 1] })
+app.post('/api/palabras', (req, res) => {
+    const { palabra } = req.body
+    palabras.push(palabra)
+    res.json({ agregada: palabra, posicion: palabras.length })
 })
 
-
-const server = app.listen(8080, () => {
-    console.log("conectado a puerto ${server.address().port}")
+app.put('/api/palabras/:pos', (req, res) => {
+    const { palabra } = req.body
+    const { pos } = req.params
+    const palabraAnt = palabras[parseInt(pos) - 1]
+    palabras[parseInt(pos) - 1] = palabra
+    res.json({ actualizada: palabra, anterior: palabraAnt })
 })
 
-server.on("error", (error) => {
-    console.log(error)
+app.delete('/api/palabras/:pos', (req, res) => {
+    const { pos } = req.params
+    const [palabra] = palabras.splice(parseInt(pos) - 1, 1)
+    res.json({ borrada: palabra })
 })
+
+const PORT = 8080
+const server = app.listen(PORT, () => {
+    console.log(`Servidor escuchando en el puerto ${server.address().port}`)
+})
+server.on('error', error => console.log(`Error en servidor ${error}`))
