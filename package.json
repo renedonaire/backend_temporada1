@@ -2,10 +2,10 @@
   "name": "practicas",
   "version": "1.0.0",
   "description": "",
-  "main": "clase_3.js",
+  "main": "./js/simple_api.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon serverExpress.js"
+    "start": "nodemon simple_api.js"
   },
   "author": "",
   "license": "ISC",
