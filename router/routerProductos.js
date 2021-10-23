@@ -34,8 +34,8 @@ routerProductos.get('/', (req, res) => {
 
 
 routerProductos.get('/:id', (req, res) => {
-  const { id } = req.params
-  const result = arrayProductos[parseInt(id) - 1]
+  const { ident } = req.params
+  const result = arrayProductos[parseInt(ident) - 1]
   result ?
     res.json({ result })
     :
@@ -44,7 +44,7 @@ routerProductos.get('/:id', (req, res) => {
 
 
 routerProductos.post('/', (req, res) => {
-  const {title, price, thumbnail} = req.body
+  const { title, price, thumbnail } = req.body
   let ident = 0
   let indexArray = []
   arrayProductos.forEach(element => indexArray.push(element.id))
@@ -61,10 +61,16 @@ routerProductos.post('/', (req, res) => {
 
 
 routerProductos.put('/:id', (req, res) => {
-  const { producto } = req.body
-  const { id } = req.params
-  arrayProductos[parseInt(id) - 1] = producto
-  res.json({ actualizado: producto })
+  const { title, price, thumbnail } = req.body
+  const { ident } = req.params
+  const producto = { title: title, price: price, thumbnail: thumbnail, id: ident }
+  const actualizado = arrayProductos[parseInt(ident) - 1]
+  if (actualizado) {
+    arrayProductos[parseInt(ident) - 1] = producto
+    res.json({ actualizado: producto })
+  } else {
+    res.json({ error: 'producto no encontrado' })
+  }
 })
 
 
