@@ -1,22 +1,12 @@
 const express = require('express')
 const app = express()
+app.use('/static', express.static('public'))
+const routerProductos = require("../router/routerProductos")
 
-const Contenedor = require('./operaciones')
-const database = new Contenedor('.//data/productos.txt')
+const app = express()
+app.use(express.json())
 
-app.get('/productos', async (req, res) => {
-    const response = await database.getAll()
-    res.json({ response })
-})
-
-app.get('/productoRandom', async (req, res) => {
-    const arrayProducts = await database.getAll()
-    const min = 1
-    const max = arrayProducts.length + 1
-    const azar = Math.floor(Math.random() * (max - min)) + min
-    const response = await database.getById(azar)
-    res.json({ response })
-})
+app.use('/api/productos', routerProductos)
 
 const PORT = 8080
 const server = app.listen(PORT, () => {
