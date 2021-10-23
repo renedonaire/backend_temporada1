@@ -3,9 +3,11 @@ const routerProductos = Router()
 
 const arrayProductos = JSON.parse('../data/productos.txt')
 
+
 routerProductos.get('/', (req, res) => {
     res.json(arrayProductos)
 })
+
 
 routerProductos.get('/:id', (req, res) => {
     const { id } = req.params
@@ -15,6 +17,7 @@ routerProductos.get('/:id', (req, res) => {
         :
         res.json({ error: 'producto no encontrado' })
 })
+
 
 routerProductos.post('/', (req, res) => {
     let { producto } = req.body
@@ -31,6 +34,7 @@ routerProductos.post('/', (req, res) => {
     res.json({ producto: producto, id: producto.id })
 })
 
+
 routerProductos.put('/:id', (req, res) => {
     const { producto } = req.body
     const { id } = req.params
@@ -38,10 +42,12 @@ routerProductos.put('/:id', (req, res) => {
     res.json({ actualizado: producto })
 })
 
+
 routerProductos.delete('/:id', (req, res) => {
     const { id } = req.params
     const [borrado] = arrayProductos.splice(parseInt(id) - 1, 1)
     res.json({ eliminado: borrado })
 })
+
 
 module.exports = routerProductos
