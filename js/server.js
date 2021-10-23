@@ -1,11 +1,11 @@
 const express = require('express')
 const app = express()
-const routerProductos = require("../router/routerProductos")
+import routerProductos from "../router/routerProductos"
 
 
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
-app.use(express.static('public'))
+app.use(json())
+app.use(urlencoded({ extended: true }))
+app.use(static('public'))
 
 app.use('/api/productos', routerProductos)
 

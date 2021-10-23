@@ -1,5 +1,5 @@
 {
-  "name": "practicas",
+  "name": "entrega_4",
   "version": "1.0.0",
   "description": "",
   "main": "./js/server.js",
@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "type": "module",
     "express": "^4.17.1"
   }
 }

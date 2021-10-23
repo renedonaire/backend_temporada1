@@ -49,5 +49,4 @@ routerProductos.delete('/:id', (req, res) => {
     res.json({ eliminado: borrado })
 })
 
-
 module.exports = routerProductos
