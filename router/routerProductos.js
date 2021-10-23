@@ -44,9 +44,7 @@ routerProductos.get('/:id', (req, res) => {
 
 
 routerProductos.post('/', (req, res) => {
-  const title = req.body.title
-  const price = req.body.price
-  const thumbnail = req.body.thumbnail
+  const {title, price, thumbnail} = req.body
   let ident = 0
   let indexArray = []
   arrayProductos.forEach(element => indexArray.push(element.id))
@@ -73,7 +71,10 @@ routerProductos.put('/:id', (req, res) => {
 routerProductos.delete('/:id', (req, res) => {
   const { id } = req.params
   const [borrado] = arrayProductos.splice(parseInt(id) - 1, 1)
-  res.json({ eliminado: borrado })
+  borrado ?
+    res.json({ eliminado: borrado })
+    :
+    res.json({ error: 'producto no encontrado' })
 })
 
 module.exports = routerProductos
