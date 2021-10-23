@@ -3,9 +3,9 @@ const routerProductos = require('../router/routerProductos')
 const app = express()
 
 
+app.use(express.urlencoded({ extended: true }))
+app.use(express.static('public'))
 app.use(express.json())
-app.use(urlencoded({ extended: true }))
-app.use(static('public'))
 
 app.use('/api/productos', routerProductos)
 
