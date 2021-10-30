@@ -9,8 +9,10 @@ app.use(express.static('public'))
 app.use(express.json())
 
 
-app.set('views', './views')
-app.set('view engine', 'pug')
+app.engine('hbs', exphbs({
+    extname: 'hbs'
+}))
+app.set('view engine', 'hbs')
 
 
 app.use('/', routerProductos)

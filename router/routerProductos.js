@@ -29,12 +29,14 @@ const arrayProductos = [
 
 
 routerProductos.get('/', (req, res) => {
-  res.render('layout')
+  res.render('form')
 });
 
 
 routerProductos.get('/productos', (req, res) => {
-  res.render('nivel')
+  // renderizar lista por json de productos
+  // res.json(arrayProductos)
+  res.render('list', {list: arrayProductos})
 })
 
 
