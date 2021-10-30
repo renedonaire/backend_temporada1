@@ -1,8 +1,8 @@
 {
-  "name": "entrega_4",
+  "name": "entrega_5",
   "version": "1.0.0",
   "description": "",
-  "main": "./js/server.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js"
@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "type": "module",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "type": "module"
   }
 }
