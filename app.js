@@ -15,7 +15,7 @@ app.engine('hbs', exphbs({
 app.set('view engine', 'hbs')
 
 
-app.use('/productos', routerProductos)
+app.use('/', routerProductos)
 
 
 const PORT = 8080

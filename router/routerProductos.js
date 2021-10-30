@@ -44,7 +44,7 @@ routerProductos.get('/', (req, res) => {
 // })
 
 
-routerProductos.post('/', (req, res) => {
+routerProductos.post('/productos', (req, res) => {
   const { title, price, thumbnail } = req.body
   let ident = 0
   let indexArray = []
@@ -57,7 +57,8 @@ routerProductos.post('/', (req, res) => {
   }
   const response = { title: title, price: price, thumbnail: thumbnail, id: ident }
   arrayProductos.push(response)
-  res.json(response)
+  console.log(response)
+  // res.json(response)
 })
 
 

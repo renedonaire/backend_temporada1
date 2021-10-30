@@ -1,2 +1,10 @@
 {{!-- Lo que se inyecta en el 'body' de 'main' --}}
-<h1>Example App: Home</h1>
+    <body>
+        <h2>Ingrese Producto</h2>
+        <form action="/productos" method="POST">
+            Title: <input type="text" name="title" />
+            Price: <input type="text" name="price" />
+            Thumbnail: <input type="text" name="thumbnail" />
+            <button>Agregar</button>
+        </form>
+    </body>
