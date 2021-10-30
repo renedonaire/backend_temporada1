@@ -27,9 +27,12 @@ const arrayProductos = [
   }
 ]
 
+// routerProductos.get('/', (req, res) => {
+//   res.json(arrayProductos)
+// })
 routerProductos.get('/', (req, res) => {
-  res.json(arrayProductos)
-})
+    res.render('home')
+});
 
 
 routerProductos.get('/:id', (req, res) => {
