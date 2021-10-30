@@ -1,5 +1,4 @@
 const express = require('express')
-const exphbs = require('express-handlebars')
 const routerProductos = require('./router/routerProductos')
 const app = express()
 
@@ -9,10 +8,8 @@ app.use(express.static('public'))
 app.use(express.json())
 
 
-app.engine('hbs', exphbs({
-    extname: 'hbs'
-}))
-app.set('view engine', 'hbs')
+app.set('views', './views')
+app.set('view engine', 'ejs')
 
 
 app.use('/', routerProductos)
