@@ -29,12 +29,12 @@ const arrayProductos = [
 
 
 routerProductos.get('/', (req, res) => {
-  res.render('layout')
+  res.render('home')
 });
 
 
 routerProductos.get('/productos', (req, res) => {
-  res.render('nivel')
+  res.render('products', {arrayProductos})
 })
 
 
