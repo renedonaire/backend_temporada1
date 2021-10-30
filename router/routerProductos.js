@@ -34,9 +34,7 @@ routerProductos.get('/', (req, res) => {
 
 
 routerProductos.get('/productos', (req, res) => {
-  // renderizar lista por json de productos
-  // res.json(arrayProductos)
-  res.render('list', {list: arrayProductos})
+  res.render('list', {arrayProductos})
 })
 
 

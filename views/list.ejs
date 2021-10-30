@@ -1,13 +1,12 @@
 <h2>Lista de Productos</h2>
 <button onclick="location.href='/'">Agregar productos</button>
 <hr>
-{{#each list}}
-    <div>
-        <p>Title: {{title}}</p>
-        <p>Price: {{price}}</p>
-        <img src="{{thumbnail}}" width="100" height="auto" alt="miniatura">
-        <hr>
-    </div>
-    {{else}}
-    <p>No hay productos</p>
-{{/each}}
+
+    <% for(var i=0; i <arrayProductos.length; i++) { %>
+        <div>
+            <p><%= arrayProductos[i].title %></p>
+            <p><%= arrayProductos[i].price %></p>
+            <img src=<%= arrayProductos[i].thumbnail %> width="100" height="auto" alt="miniatura">
+            <hr>
+        </div>
+    <% } %>
