@@ -1,8 +1,11 @@
-    {{#each list}}
-        <div>
-            <p>Title: {{title}}</p>
-            <p>Price: {{price}}</p>
-            <p>Thumbnail: {{thumbnail}}</p>
-            <hr>
-        </div>
-  {{/each}}
+<h2>Lista de Productos</h2>
+<button onclick="location.href='/'">Agregar productos</button>
+<hr>
+{{#each list}}
+    <div>
+        <p>Title: {{title}}</p>
+        <p>Price: {{price}}</p>
+        <img src="{{thumbnail}}" width="100" height="auto" alt="miniatura">
+        <hr>
+    </div>
+{{/each}}
