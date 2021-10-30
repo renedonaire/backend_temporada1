@@ -1,5 +1,5 @@
 const express = require('express')
-const exphbs  = require('express-handlebars')
+const exphbs = require('express-handlebars')
 const routerProductos = require('./router/routerProductos')
 const app = express()
 
@@ -9,11 +9,13 @@ app.use(express.static('public'))
 app.use(express.json())
 
 
-app.engine('handlebars', exphbs())
-app.set('view engine', 'handlebars')
+app.engine('hbs', exphbs({
+    extname: 'hbs'
+}))
+app.set('view engine', 'hbs')
 
 
-app.use('/api/productos', routerProductos)
+app.use('/productos', routerProductos)
 
 
 const PORT = 8080

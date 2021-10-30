@@ -31,7 +31,7 @@ const arrayProductos = [
 //   res.json(arrayProductos)
 // })
 routerProductos.get('/', (req, res) => {
-    res.render('home')
+  res.render('home')
 });
 
 
