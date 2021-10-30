@@ -27,22 +27,21 @@ const arrayProductos = [
   }
 ]
 
-// routerProductos.get('/', (req, res) => {
-//   res.json(arrayProductos)
-// })
+
 routerProductos.get('/', (req, res) => {
   res.render('home')
 });
 
 
-routerProductos.get('/:id', (req, res) => {
-  const { id } = req.params
-  const result = arrayProductos[parseInt(id) - 1]
-  result ?
-    res.json({ result })
-    :
-    res.json({ error: 'producto no encontrado' })
-})
+// GET por id - desactivado
+// routerProductos.get('/:id', (req, res) => {
+//   const { id } = req.params
+//   const result = arrayProductos[parseInt(id) - 1]
+//   result ?
+//     res.json({ result })
+//     :
+//     res.json({ error: 'producto no encontrado' })
+// })
 
 
 routerProductos.post('/', (req, res) => {
@@ -62,27 +61,29 @@ routerProductos.post('/', (req, res) => {
 })
 
 
-routerProductos.put('/:id', (req, res) => {
-  const { title, price, thumbnail } = req.body
-  const { ident } = req.params
-  const producto = { title: title, price: price, thumbnail: thumbnail, id: ident }
-  const actualizado = arrayProductos[parseInt(ident) - 1]
-  if (actualizado) {
-    arrayProductos[parseInt(ident) - 1] = producto
-    res.json({ actualizado: producto })
-  } else {
-    res.json({ error: 'producto no encontrado' })
-  }
-})
+// PUT por id - desactivado
+// routerProductos.put('/:id', (req, res) => {
+//   const { title, price, thumbnail } = req.body
+//   const { ident } = req.params
+//   const producto = { title: title, price: price, thumbnail: thumbnail, id: ident }
+//   const actualizado = arrayProductos[parseInt(ident) - 1]
+//   if (actualizado) {
+//     arrayProductos[parseInt(ident) - 1] = producto
+//     res.json({ actualizado: producto })
+//   } else {
+//     res.json({ error: 'producto no encontrado' })
+//   }
+// })
 
 
-routerProductos.delete('/:id', (req, res) => {
-  const { id } = req.params
-  const [borrado] = arrayProductos.splice(parseInt(id) - 1, 1)
-  borrado ?
-    res.json({ eliminado: borrado })
-    :
-    res.json({ error: 'producto no encontrado' })
-})
+// DELETE por id - desactivado
+// routerProductos.delete('/:id', (req, res) => {
+//   const { id } = req.params
+//   const [borrado] = arrayProductos.splice(parseInt(id) - 1, 1)
+//   borrado ?
+//     res.json({ eliminado: borrado })
+//     :
+//     res.json({ error: 'producto no encontrado' })
+// })
 
 module.exports = routerProductos
