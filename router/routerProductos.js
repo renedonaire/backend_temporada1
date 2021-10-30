@@ -29,8 +29,15 @@ const arrayProductos = [
 
 
 routerProductos.get('/', (req, res) => {
-  res.render('home')
+  res.render('form')
 });
+
+
+routerProductos.get('/productos', (req, res) => {
+  // renderizar lista por json de productos
+  // res.json(arrayProductos)
+  res.render('list', {list: arrayProductos})
+})
 
 
 // GET por id - desactivado
@@ -58,7 +65,7 @@ routerProductos.post('/productos', (req, res) => {
   const response = { title: title, price: price, thumbnail: thumbnail, id: ident }
   arrayProductos.push(response)
   console.log(response)
-  // res.json(response)
+  res.redirect('/')
 })
 
 
