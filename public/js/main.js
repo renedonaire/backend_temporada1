@@ -15,8 +15,6 @@ const addProduct = () => {
         title: document.getElementById('title').value,
         price: document.getElementById('price').value,
         thumbnail: document.getElementById('thumbnail').value
-
-        ,
     }
     socket.emit('new-product', product);
 
@@ -31,26 +29,30 @@ const addProduct = () => {
 
 // Metodo para agregar mensajes
 const addMessage = () => {
+    const usuario = document.getElementById('email').value
+    const fecha = new Date().toLocaleString("en-GB")
     const mensaje = {
-        autor: document.getElementById('userName').value,
-        texto: document.getElementById('texto').value
+        autor: document.getElementById('email').value,
+        texto: document.getElementById('texto').value,
+        fecha: fecha
     }
     socket.emit('new-message', mensaje);
 
-    // Limpiamos los campos de texto
-    document.getElementById('userName').value = ''
-    document.getElementById('texto').value = ''
+    document.getElementById('email').value = usuario
+    document.getElementById('texto').value = ""
+
     return false
 }
 
 // Metodo que me renderiza los mensajes en el DOM
 const renderMessages = (messages) => {
-    const html = messages.map((element, index) => {
+    const html = messages.map((element) => {
         return (`
-            <div>
-                <strong>${index} - ${element.autor}</strong>: 
-                <em>${element.texto}</em> 
-            </div>
+            <p>
+            <span style="color:blue;"><b>${element.autor}</b></span>
+            <span style="color:brown;">[${element.fecha}]</span>
+            <span style="color:green;"><i>${element.texto}</i></span>
+            </p> 
             `)
     }).join(' ')
     document.getElementById('mensajes').innerHTML = html;

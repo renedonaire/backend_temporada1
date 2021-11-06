@@ -1,7 +1,7 @@
 // Almacenamiento de mensajes
 
 const messages = [
-    { autor: 'server', texto: 'Conectado al chat' }
+    { autor: 'server', texto: 'Conectado al chat', fecha: ''}
 ];
 
 const getMessages = () => messages;
