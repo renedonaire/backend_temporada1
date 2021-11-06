@@ -4,6 +4,8 @@ const routerProductos = require('./router/routerProductos')
 const { Server: HTTPServer } = require('http')
 const { Server: SocketServer } = require('socket.io')
 const { getMessages, saveMessage } = require('./models/mensajes')
+const { getProducts, saveProduct } = require('./models/productos')
+
 
 const app = express()
 const httpServer = new HTTPServer(app)
@@ -29,6 +31,9 @@ io.on('connection', socket => {
 
     const messages = getMessages()
     socket.emit('messages', messages)
+
+    const products = getProducts()
+    socket.emit('products', products)
 
     socket.on('new-message', message => {
         saveMessage(message)

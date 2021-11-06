@@ -5,6 +5,11 @@ socket.on('messages', data => {
     renderMessages(data)
 })
 
+socket.on('products', data => {
+    alert(data)
+})
+
+
 // Metodo para agregar mensajes
 const addMessage = () => {
     const mensaje = {
