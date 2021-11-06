@@ -1,13 +1,22 @@
 <h2>Lista de Productos</h2>
 <button onclick="location.href='/'">Agregar productos</button>
 <hr>
-{{#each list}}
-    <div>
-        <p>Title: {{title}}</p>
-        <p>Price: {{price}}</p>
-        <img src="{{thumbnail}}" width="100" height="auto" alt="miniatura">
-        <hr>
-    </div>
+<table>
+    <tr>
+        <th>Título</th>
+        <th>Precio</th>
+        <th>Miniatura</th>
+    </tr>
+    {{#each list}}
+        <tr>
+            <td>{{title}}</td>
+            <td>{{price}}</td>
+            <td>
+                <img src="{{thumbnail}}" width="50" height="auto" alt="miniatura">
+            </td>
+        </tr>
     {{else}}
-    <p>No hay productos</p>
-{{/each}}
+        <td>No hay productos</td>
+    {{/each}}
+</table>
+<hr>
