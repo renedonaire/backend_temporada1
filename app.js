@@ -37,9 +37,14 @@ io.on('connection', socket => {
 
     socket.on('new-message', message => {
         saveMessage(message)
-
         const allMessages = getMessages();
         io.sockets.emit('messages', allMessages)
+    })
+
+    socket.on('new-product', product => {
+        saveProduct(product)
+        const allProducts = getProducts();
+        io.sockets.emit('products', allProducts)
     })
 })
 

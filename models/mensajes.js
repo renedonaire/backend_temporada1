@@ -7,7 +7,7 @@ const messages = [
 const getMessages = () => messages;
 
 const saveMessage = mensaje => {
-    messages.push(mensaje);
+    messages.unshift(mensaje);
 }
 
 module.exports = {

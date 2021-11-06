@@ -24,7 +24,8 @@ const arrayProductos = [
 const getProducts = () => arrayProductos;
 
 const saveProduct = product => {
-    arrayProductos.push(product);
+  arrayProductos.push(product);
+  console.log(arrayProductos)
 }
 
 module.exports = {

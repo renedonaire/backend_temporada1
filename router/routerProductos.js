@@ -1,54 +1,36 @@
 const express = require('express')
 const { Router } = require('express')
 const routerProductos = Router()
+const { getProducts } = require('../models/productos')
 const app = express()
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
-const arrayProductos = [
-  {
-    "title": "La Vuelta al Mundo en 80 días",
-    "price": 15900,
-    "thumbnail": "https://www.antartica.cl/media/catalog/product/9/7/9788417127916_1.png?quality=80&bg-color=255,255,255&fit=bounds&height=700&width=700&canvas=700:700&format=jpeg",
-    "id": 1
-  },
-  {
-    "title": "Primera Persona Del Singular",
-    "price": 19900,
-    "thumbnail": "https://www.antartica.cl/media/catalog/product/9/7/9789569961212_1.png?quality=80&bg-color=255,255,255&fit=bounds&height=700&width=700&canvas=700:700&format=jpeg",
-    "id": 2
-  },
-  {
-    "title": "Ajuste De Cuentas",
-    "price": 15000,
-    "thumbnail": "https://www.antartica.cl/media/catalog/product/9/7/9789569646867_1.png?quality=80&bg-color=255,255,255&fit=bounds&height=700&width=700&canvas=700:700&format=jpeg",
-    "id": 3
-  }
-]
-
+const arrayProductos = JSON.stringify(getProducts())
 
 routerProductos.get('/', (req, res) => {
   res.render('list', { list: arrayProductos })
 })
 
 
-routerProductos.post('/', (req, res) => {
-  const { title, price, thumbnail } = req.body
-  let ident = 0
-  let indexArray = []
-  arrayProductos.forEach(element => indexArray.push(element.id))
-  if (indexArray.length > 0) {
-    const arraySorted = indexArray.sort((a, b) => (b - a))
-    ident = arraySorted[0] + 1
-  } else {
-    ident = 1
-  }
-  const response = { title: title, price: price, thumbnail: thumbnail, id: ident }
-  arrayProductos.push(response)
-  console.log(response)
-  res.redirect('/')
-})
+// AGREGAR por POST - desactivado
+// routerProductos.post('/', (req, res) => {
+//   const { title, price, thumbnail } = req.body
+//   let ident = 0
+//   let indexArray = []
+//   arrayProductos.forEach(element => indexArray.push(element.id))
+//   if (indexArray.length > 0) {
+//     const arraySorted = indexArray.sort((a, b) => (b - a))
+//     ident = arraySorted[0] + 1
+//   } else {
+//     ident = 1
+//   }
+//   const response = { title: title, price: price, thumbnail: thumbnail, id: ident }
+//   arrayProductos.push(response)
+//   console.log(response)
+//   res.redirect('/')
+// })
 
 
 // GET por id - desactivado
