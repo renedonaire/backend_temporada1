@@ -57,7 +57,7 @@ const renderMessages = (messages) => {
 }
 
 // Metodo que me renderiza los productos en el DOM
-const renderProducts = (products, res) => {
+const renderProducts = (products) => {
     const html = products.map((element) => {
         return (`
             <tr>
