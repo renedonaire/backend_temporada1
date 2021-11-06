@@ -29,29 +29,11 @@ const arrayProductos = [
 
 
 routerProductos.get('/', (req, res) => {
-  res.render('form')
-});
-
-
-routerProductos.get('/productos', (req, res) => {
-  // renderizar lista por json de productos
-  // res.json(arrayProductos)
   res.render('list', { list: arrayProductos })
 })
 
 
-// GET por id - desactivado
-// routerProductos.get('/:id', (req, res) => {
-//   const { id } = req.params
-//   const result = arrayProductos[parseInt(id) - 1]
-//   result ?
-//     res.json({ result })
-//     :
-//     res.json({ error: 'producto no encontrado' })
-// })
-
-
-routerProductos.post('/productos', (req, res) => {
+routerProductos.post('/', (req, res) => {
   const { title, price, thumbnail } = req.body
   let ident = 0
   let indexArray = []
@@ -67,6 +49,17 @@ routerProductos.post('/productos', (req, res) => {
   console.log(response)
   res.redirect('/')
 })
+
+
+// GET por id - desactivado
+// routerProductos.get('/:id', (req, res) => {
+//   const { id } = req.params
+//   const result = arrayProductos[parseInt(id) - 1]
+//   result ?
+//     res.json({ result })
+//     :
+//     res.json({ error: 'producto no encontrado' })
+// })
 
 
 // PUT por id - desactivado
