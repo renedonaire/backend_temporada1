@@ -1,5 +1,4 @@
-// Almacenamiento de productos
-
+// Productos - inicial
 const arrayProductos = [
   {
     "title": "La Vuelta al Mundo en 80 días",
@@ -24,11 +23,10 @@ const arrayProductos = [
 const getProducts = () => arrayProductos;
 
 const saveProduct = product => {
-  arrayProductos.push(product);
-  console.log(arrayProductos)
+  arrayProductos.push(product)
 }
 
 module.exports = {
-    getProducts,
-    saveProduct
+  getProducts,
+  saveProduct
 }

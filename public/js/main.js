@@ -9,7 +9,7 @@ socket.on('products', data => {
 })
 
 
-// Metodo para agregar productos
+
 const addProduct = () => {
     const product = {
         title: document.getElementById('title').value,
@@ -17,8 +17,6 @@ const addProduct = () => {
         thumbnail: document.getElementById('thumbnail').value
     }
     socket.emit('new-product', product);
-
-    // Limpiamos los campos de texto
     document.getElementById('title').value = ''
     document.getElementById('price').value = ''
     document.getElementById('thumbnail').value = ''
@@ -27,7 +25,6 @@ const addProduct = () => {
 
 
 
-// Metodo para agregar mensajes
 const addMessage = () => {
     const usuario = document.getElementById('email').value
     const fecha = new Date().toLocaleString("en-GB")
@@ -37,16 +34,15 @@ const addMessage = () => {
         fecha: fecha
     }
     socket.emit('new-message', mensaje);
-
     document.getElementById('email').value = usuario
     document.getElementById('texto').value = ""
-
     return false
 }
 
-// Metodo que me renderiza los mensajes en el DOM
+
+
 const renderMessages = (messages) => {
-    if (messages.lenght>0) {
+    if (messages.lenght > 0) {
         const html = messages.map((element) => {
             return (`
                 <p>
@@ -62,7 +58,8 @@ const renderMessages = (messages) => {
     }
 }
 
-// Metodo que me renderiza los productos en el DOM
+
+
 const renderProducts = (products) => {
     const html = products.map((element) => {
         return (`
@@ -75,5 +72,5 @@ const renderProducts = (products) => {
             </tr>
         `)
     }).join(' ')
-    document.getElementById('productos').innerHTML = html;
+    document.getElementById('productos').innerHTML = html
 }
