@@ -46,16 +46,20 @@ const addMessage = () => {
 
 // Metodo que me renderiza los mensajes en el DOM
 const renderMessages = (messages) => {
-    const html = messages.map((element) => {
-        return (`
-            <p>
-            <span style="color:blue;"><b>${element.autor}</b></span>
-            <span style="color:brown;">[${element.fecha}]</span>
-            <span style="color:green;"><i>${element.texto}</i></span>
-            </p> 
-            `)
-    }).join(' ')
-    document.getElementById('mensajes').innerHTML = html;
+    if (messages.lenght>0) {
+        const html = messages.map((element) => {
+            return (`
+                <p>
+                <span style="color:blue;"><b>${element.autor}</b></span>
+                <span style="color:brown;">[${element.fecha}]</span>
+                <span style="color:green;"><i>${element.texto}</i></span>
+                </p> 
+                `)
+        }).join(' ')
+        document.getElementById('mensajes').innerHTML = html;
+    } else {
+        document.getElementById('mensajes').innerHTML = "No hay mensajes"
+    }
 }
 
 // Metodo que me renderiza los productos en el DOM
