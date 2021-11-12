@@ -1,6 +1,6 @@
 const socket = io.connect();
 
-socket.on('messages', data => {
+socket.on('messages', async data => {
     renderMessages(data)
 })
 
@@ -10,13 +10,13 @@ socket.on('products', data => {
 
 
 
-const addProduct = () => {
+function addProduct() {
     const product = {
         title: document.getElementById('title').value,
         price: document.getElementById('price').value,
         thumbnail: document.getElementById('thumbnail').value
     }
-    socket.emit('new-product', product);
+    socket.emit('new-product', product)
     document.getElementById('title').value = ''
     document.getElementById('price').value = ''
     document.getElementById('thumbnail').value = ''
@@ -42,20 +42,22 @@ const addMessage = () => {
 
 
 const renderMessages = (messages) => {
-    if (messages.lenght > 0) {
-        const html = messages.map((element) => {
-            return (`
-                <p>
-                <span style="color:blue;"><b>${element.autor}</b></span>
-                <span style="color:brown;">[${element.fecha}]</span>
-                <span style="color:green;"><i>${element.texto}</i></span>
-                </p> 
-                `)
-        }).join(' ')
-        document.getElementById('mensajes').innerHTML = html;
+    let html = ''
+    if (messages.length > 0) {
+        messages.forEach(element => {
+            html = html +
+                `
+                    <p>
+                    <span style="color:blue;"><b>${element.autor}</b></span>
+                    <span style="color:brown;">[${element.fecha}]</span>
+                    <span style="color:green;"><i>${element.texto}</i></span>
+                    </p> 
+                `
+        })
     } else {
-        document.getElementById('mensajes').innerHTML = "No hay mensajes"
+        html = "No hay mensajes"
     }
+    document.getElementById('mensajes').innerHTML = html
 }
 
 

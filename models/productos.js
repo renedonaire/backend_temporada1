@@ -20,7 +20,7 @@ const arrayProductos = [
   }
 ]
 
-const getProducts = () => arrayProductos;
+const getProducts = () => arrayProductos
 
 const saveProduct = product => {
   arrayProductos.push(product)

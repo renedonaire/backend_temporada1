@@ -26,24 +26,24 @@ app.set('view engine', 'hbs')
 app.use('/', routerProductos)
 
 
-io.on('connection', socket => {
+io.on('connection', async socket => {
     console.log('Nuevo cliente conectado')
 
-    const messages = getMessages()
+    const messages = await getMessages()
     socket.emit('messages', messages)
 
     const products = getProducts()
     socket.emit('products', products)
 
-    socket.on('new-message', message => {
-        saveMessage(message)
-        const allMessages = getMessages();
+    socket.on('new-message', async message => {
+        await saveMessage(message)
+        const allMessages = await getMessages()
         io.sockets.emit('messages', allMessages)
     })
 
     socket.on('new-product', product => {
         saveProduct(product)
-        const allProducts = getProducts();
+        const allProducts = getProducts()
         io.sockets.emit('products', allProducts)
     })
 })
