@@ -2,38 +2,23 @@ const express = require('express')
 const { Router } = require('express')
 const routerProductos = Router()
 const app = express()
+const admin = require('../data/userLevel')
+const { saveProduct, getProducts } = require('../models/modeloProductos')
+
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
-const arrayProductos = [
-  {
-    "title": "La Vuelta al Mundo en 80 días",
-    "price": 15900,
-    "thumbnail": "https://images/vuelta.jpg",
-    "id": 1
-  },
-  {
-    "title": "Primera Persona Del Singular",
-    "price": 19900,
-    "thumbnail": "https://images/primera.jpeg",
-    "id": 2
-  },
-  {
-    "title": "Ajuste De Cuentas",
-    "price": 15000,
-    "thumbnail": "https://images/ajuste.jpeg",
-    "id": 3
-  }
-]
 
-routerProductos.get('/', (req, res) => {
+routerProductos.get('/', async (req, res) => {
+  const arrayProductos = await getProducts()
   res.json(arrayProductos)
 })
 
 
-routerProductos.get('/:id', (req, res) => {
+routerProductos.get('/:id', async (req, res) => {
   const { id } = req.params
+  const arrayProductos = await getProducts()
   const result = arrayProductos[parseInt(id) - 1]
   result ?
     res.json({ result })
