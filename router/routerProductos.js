@@ -43,43 +43,58 @@ routerProductos.get('/:id', (req, res) => {
 
 
 routerProductos.post('/', (req, res) => {
-  const { title, price, thumbnail } = req.body
-  let ident = 0
-  let indexArray = []
-  arrayProductos.forEach(element => indexArray.push(element.id))
-  if (indexArray.length > 0) {
-    const arraySorted = indexArray.sort((a, b) => (b - a))
-    ident = arraySorted[0] + 1
+  if (admin) {
+    const { title, price, thumbnail } = req.body
+    let ident = 0
+    let indexArray = []
+    arrayProductos.forEach(element => indexArray.push(element.id))
+    if (indexArray.length > 0) {
+      const arraySorted = indexArray.sort((a, b) => (b - a))
+      ident = arraySorted[0] + 1
+    } else {
+      ident = 1
+    }
+    const response = { title: title, price: price, thumbnail: thumbnail, id: ident }
+    arrayProductos.push(response)
+    res.json(response)
   } else {
-    ident = 1
+    const response = { error: '-1', descripcion: "ruta '/api/productos' método 'post' no autorizada" }
+    res.json(response)
   }
-  const response = { title: title, price: price, thumbnail: thumbnail, id: ident }
-  arrayProductos.push(response)
-  res.json(response)
 })
 
 
 routerProductos.put('/:id', (req, res) => {
-  const { title, price, thumbnail } = req.body
-  const { ident } = req.params
-  const producto = { title: title, price: price, thumbnail: thumbnail, id: ident }
-  const actualizado = arrayProductos[parseInt(ident) - 1]
-  if (actualizado) {
-    arrayProductos[parseInt(ident) - 1] = producto
-    res.json({ actualizado: producto })
+  if (admin) {
+    const { title, price, thumbnail } = req.body
+    const { ident } = req.params
+    const producto = { title: title, price: price, thumbnail: thumbnail, id: ident }
+    const actualizado = arrayProductos[parseInt(ident) - 1]
+    if (actualizado) {
+      arrayProductos[parseInt(ident) - 1] = producto
+      res.json({ actualizado: producto })
+    } else {
+      res.json({ error: 'producto no encontrado' })
+    }
   } else {
-    res.json({ error: 'producto no encontrado' })
+    const response = { error: '-1', descripcion: "ruta '/api/productos' método 'put' no autorizada" }
+    res.json(response)
   }
 })
 
 
 routerProductos.delete('/:id', (req, res) => {
-  const { id } = req.params
-  const [borrado] = arrayProductos.splice(parseInt(id) - 1, 1)
-  borrado ?
-    res.json({ eliminado: borrado })
-    :
-    res.json({ error: 'producto no encontrado' })
+  if (admin) {
+    const { id } = req.params
+    const [borrado] = arrayProductos.splice(parseInt(id) - 1, 1)
+    borrado ?
+      res.json({ eliminado: borrado })
+      :
+      res.json({ error: 'producto no encontrado' })
+  } else {
+    const response = { error: '-1', descripcion: "ruta '/api/productos' método 'post' no autorizada" }
+    res.json(response)
+  }
 })
 
 module.exports = routerProductos
