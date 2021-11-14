@@ -15,9 +15,22 @@ const getProducts = async () => {
 }
 
 const saveProduct = async (product) => {
+    const { nombre, descripcion, codigo, url, precio, stock } = product
+    const stamp = new Date().toLocaleString("en-GB")
     const arrayProducts = await getProducts()
+    let ident = 0
+    let indexArray = []
+    arrayProducts.forEach(element => indexArray.push(element.id))
+    if (indexArray.length > 0) {
+        const arraySorted = indexArray.sort((a, b) => (b - a))
+        ident = arraySorted[0] + 1
+    } else {
+        ident = 1
+    }
+    const response = { id: ident, timestamp: stamp, nombre: nombre, descripcion: descripcion, codigo: codigo, url: url, precio: precio, stock: stock }
+    arrayProducts.unshift(response)
+
     try {
-        arrayProducts.unshift(product)
         await fs.promises.writeFile(route, JSON.stringify(arrayProducts, null, 2))
         return arrayProducts
     } catch (err) {

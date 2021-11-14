@@ -29,21 +29,12 @@ routerProductos.get('/:id', async (req, res) => {
 
 routerProductos.post('/', (req, res) => {
   if (admin) {
-    const { title, price, thumbnail } = req.body
-    let ident = 0
-    let indexArray = []
-    arrayProductos.forEach(element => indexArray.push(element.id))
-    if (indexArray.length > 0) {
-      const arraySorted = indexArray.sort((a, b) => (b - a))
-      ident = arraySorted[0] + 1
-    } else {
-      ident = 1
-    }
-    const response = { title: title, price: price, thumbnail: thumbnail, id: ident }
-    arrayProductos.push(response)
+    const product = req.body
+    saveProduct(product)
+    const response = { estado: 'agregado' }
     res.json(response)
   } else {
-    const response = { error: '-1', descripcion: "ruta '/api/productos' método 'post' no autorizada" }
+    const response = { error: '-1', descripcion: "ruta '/api/productos' método 'POST' no autorizada" }
     res.json(response)
   }
 })
@@ -62,7 +53,7 @@ routerProductos.put('/:id', (req, res) => {
       res.json({ error: 'producto no encontrado' })
     }
   } else {
-    const response = { error: '-1', descripcion: "ruta '/api/productos' método 'put' no autorizada" }
+    const response = { error: '-1', descripcion: "ruta '/api/productos' método 'PUT' no autorizada" }
     res.json(response)
   }
 })
@@ -77,7 +68,7 @@ routerProductos.delete('/:id', (req, res) => {
       :
       res.json({ error: 'producto no encontrado' })
   } else {
-    const response = { error: '-1', descripcion: "ruta '/api/productos' método 'post' no autorizada" }
+    const response = { error: '-1', descripcion: "ruta '/api/productos' método 'DELETE' no autorizada" }
     res.json(response)
   }
 })
