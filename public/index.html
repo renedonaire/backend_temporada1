@@ -11,7 +11,7 @@
     <body>
         <p>Ajuste nivel de user: folder 'data' - archivo 'userLevel.js'</p>
         <hr>
-        <h2>GET, GET/:id, PUT/:id - Probar con Postman</h2>
+        <h2>GET, GET/:id - Probar con Postman</h2>
         <hr>
         <h2>POST - administradores</h2>
         <form action="/api/productos" method="POST">
@@ -22,6 +22,19 @@
             Precio: <input type="number" name="precio" />
             Stock: <input type="number" name="stock" />
             <input type="submit" value="Agregar">
+        </form>
+        <hr>
+        <h2>PUT - administradores</h2>
+        <!-- <form action="/api/productos/id.value" method="PUT"> -->
+            <form action="/api/productos/" method="PUT" onsubmit="this.action = this.action + this.id.value; this.submit();" >
+            ID: <input type="number" name="id" />
+            Nombre: <input type="text" name="nombre" />
+            Descripción: <input type="text" name="descripcion" />
+            Código: <input type="text" name="codigo" />
+            Foto: <input type="text" name="url" />
+            Precio: <input type="number" name="precio" />
+            Stock: <input type="number" name="stock" />
+            <input type="submit" value="Actualizar">
         </form>
     </body>
 

@@ -44,6 +44,7 @@ routerProductos.put('/:id', async (req, res) => {
   if (admin) {
     const product = req.body
     const ident = req.params
+    console.log("routerProductos " + "ident: " + JSON.stringify(ident) + " - product: " + JSON.stringify(product));
     updateProduct(product, ident)
   } else {
     const response = { error: '-1', descripcion: "ruta '/api/productos' método 'PUT' no autorizada" }

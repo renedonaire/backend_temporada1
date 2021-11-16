@@ -40,18 +40,21 @@ const saveProduct = async (product) => {
 
 
 const updateProduct = async (product, ident) => {
+    console.log("updateProduct - product: " + JSON.stringify(product) + " - ident: " + JSON.stringify(ident));
+    const arrayProducts = await getProducts()
     const { nombre, descripcion, codigo, url, precio, stock } = product
-    const { id } = ident
+    const id = parseInt(ident.id)
+    console.log("id: " + id);
     const stamp = new Date().toLocaleString("en-GB")
     const response = { id: id, timestamp: stamp, nombre: nombre, descripcion: descripcion, codigo: codigo, url: url, precio: precio, stock: stock }
-    const arrayProducts = await getProducts()
+    console.log("update response: " + JSON.stringify(response));
 
-    const actualizado = arrayProductos[parseInt(id) - 1]
+    const actualizado = arrayProducts[parseInt(id) - 1]
     if (actualizado) {
-        arrayProductos[parseInt(id) - 1] = response
-        res.json({ actualizado: response })
+        arrayProducts[parseInt(id) - 1] = response
+        return ({ actualizado: response })
     } else {
-        res.json({ error: 'producto no encontrado' })
+        return ({ error: 'producto no encontrado' })
     }
 
     try {
