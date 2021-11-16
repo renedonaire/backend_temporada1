@@ -38,7 +38,34 @@ const saveProduct = async (product) => {
     }
 }
 
+
+const updateProduct = async (product, ident) => {
+    const { nombre, descripcion, codigo, url, precio, stock } = product
+    const { id } = ident
+    const stamp = new Date().toLocaleString("en-GB")
+    const response = { id: id, timestamp: stamp, nombre: nombre, descripcion: descripcion, codigo: codigo, url: url, precio: precio, stock: stock }
+    const arrayProducts = await getProducts()
+
+    const actualizado = arrayProductos[parseInt(id) - 1]
+    if (actualizado) {
+        arrayProductos[parseInt(id) - 1] = response
+        res.json({ actualizado: response })
+    } else {
+        res.json({ error: 'producto no encontrado' })
+    }
+
+    try {
+        await fs.promises.writeFile(route, JSON.stringify(arrayProducts, null, 2))
+        return arrayProducts
+    } catch (err) {
+        console.log("Error al guardar: ", err)
+    }
+}
+
+
+
 module.exports = {
     getProducts,
     saveProduct,
+    updateProduct
 }

@@ -3,7 +3,7 @@ const { Router } = require('express')
 const routerProductos = Router()
 const app = express()
 const admin = require('../data/userLevel')
-const { saveProduct, getProducts } = require('../models/modeloProductos')
+const { saveProduct, getProducts, updateProduct } = require('../models/modeloProductos')
 
 
 app.use(express.urlencoded({ extended: true }))
@@ -40,18 +40,11 @@ routerProductos.post('/', (req, res) => {
 })
 
 
-routerProductos.put('/:id', (req, res) => {
+routerProductos.put('/:id', async (req, res) => {
   if (admin) {
-    const { title, price, thumbnail } = req.body
-    const { ident } = req.params
-    const producto = { title: title, price: price, thumbnail: thumbnail, id: ident }
-    const actualizado = arrayProductos[parseInt(ident) - 1]
-    if (actualizado) {
-      arrayProductos[parseInt(ident) - 1] = producto
-      res.json({ actualizado: producto })
-    } else {
-      res.json({ error: 'producto no encontrado' })
-    }
+    const product = req.body
+    const ident = req.params
+    updateProduct(product, ident)
   } else {
     const response = { error: '-1', descripcion: "ruta '/api/productos' método 'PUT' no autorizada" }
     res.json(response)
