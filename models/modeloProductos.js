@@ -36,7 +36,7 @@ const saveProduct = async (product) => {
 
     try {
         await fs.promises.writeFile(route, JSON.stringify(arrayProducts, null, 2))
-        return arrayProducts
+        return { estado: 'producto agregado' }
     } catch (err) {
         console.log("Error al guardar: ", err)
     }
@@ -47,7 +47,7 @@ const saveProduct = async (product) => {
 const updateProduct = async (product, ident) => {
     const arrayProducts = await getProducts()
     const id = parseInt(ident.id)
-    const { nombre, descripcion, codigo, url, precio, stock } = product[0]
+    const { nombre, descripcion, codigo, url, precio, stock } = product
     const stamp = new Date().toLocaleString("en-GB")
     const updated = { id: id, timestamp: stamp, nombre: nombre, descripcion: descripcion, codigo: codigo, url: url, precio: precio, stock: stock }
 
@@ -72,10 +72,12 @@ const updateProduct = async (product, ident) => {
 const deleteProduct = async (ident) => {
     const arrayProducts = await getProducts()
     const id = parseInt(ident.id)
-    const borrado = JSON.stringify(arrayProductos.splice(parseInt(id) - 1, 1))
-    if (borrado) {
+    const index = arrayProducts.findIndex(e => e.id === id)
+
+    if (index != -1) {
         try {
-            await fs.promises.writeFile(route, JSON.stringify(arrayProducts, null, 2))
+            const borrado = arrayProducts.filter(e => e.id != id)
+            await fs.promises.writeFile(route, JSON.stringify(borrado, null, 2))
             return ({ estado: 'producto eliminado' })
         } catch (err) {
             console.log("Error al guardar: ", err)

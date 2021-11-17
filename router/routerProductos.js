@@ -2,7 +2,7 @@ const express = require('express')
 const { Router } = require('express')
 const routerProductos = Router()
 const app = express()
-const admin = require('../data/userLevel')
+const { userLevel } = require('../data/userLevel')
 const { saveProduct, getProducts, updateProduct, deleteProduct, getProductById } = require('../models/modeloProductos')
 
 
@@ -10,10 +10,12 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
 
+
 routerProductos.get('/', async (req, res) => {
   const arrayProductos = await getProducts()
   res.json(arrayProductos)
 })
+
 
 
 routerProductos.get('/:id', async (req, res) => {
@@ -23,11 +25,12 @@ routerProductos.get('/:id', async (req, res) => {
 })
 
 
-routerProductos.post('/', (req, res) => {
+
+routerProductos.post('/', async (req, res) => {
+  const admin = userLevel()
   if (admin) {
     const product = req.body
-    saveProduct(product)
-    const response = { estado: 'agregado' }
+    const response = await saveProduct(product)
     res.json(response)
   } else {
     const response = { error: '-1', descripcion: "ruta '/api/productos' método 'POST' no autorizada" }
@@ -36,7 +39,9 @@ routerProductos.post('/', (req, res) => {
 })
 
 
+
 routerProductos.put('/:id', async (req, res) => {
+  const admin = userLevel()
   if (admin) {
     const product = req.body
     const ident = req.params
@@ -49,7 +54,9 @@ routerProductos.put('/:id', async (req, res) => {
 })
 
 
+
 routerProductos.delete('/:id', async (req, res) => {
+  const admin = userLevel()
   if (admin) {
     const product = req.body
     const ident = req.params
@@ -60,5 +67,7 @@ routerProductos.delete('/:id', async (req, res) => {
     res.json(response)
   }
 })
+
+
 
 module.exports = routerProductos
