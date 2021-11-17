@@ -40,28 +40,25 @@ const saveProduct = async (product) => {
 
 
 const updateProduct = async (product, ident) => {
-    console.log("updateProduct - product: " + JSON.stringify(product) + " - ident: " + JSON.stringify(ident));
     const arrayProducts = await getProducts()
-    const { nombre, descripcion, codigo, url, precio, stock } = product
     const id = parseInt(ident.id)
-    console.log("id: " + id);
+    const { nombre, descripcion, codigo, url, precio, stock } = product[0]
     const stamp = new Date().toLocaleString("en-GB")
-    const response = { id: id, timestamp: stamp, nombre: nombre, descripcion: descripcion, codigo: codigo, url: url, precio: precio, stock: stock }
-    console.log("update response: " + JSON.stringify(response));
+    const updated = { id: id, timestamp: stamp, nombre: nombre, descripcion: descripcion, codigo: codigo, url: url, precio: precio, stock: stock }
 
-    const actualizado = arrayProducts[parseInt(id) - 1]
+    const actualizado = JSON.stringify(arrayProducts.find(e => e.id === id))
+    const index = arrayProducts.findIndex(e => e.id === id)
+
     if (actualizado) {
-        arrayProducts[parseInt(id) - 1] = response
-        return ({ actualizado: response })
+        arrayProducts[index] = updated
+        try {
+            await fs.promises.writeFile(route, JSON.stringify(arrayProducts, null, 2))
+            return ({ estado: 'actualizado' })
+        } catch (err) {
+            console.log("Error al guardar: ", err)
+        }
     } else {
         return ({ error: 'producto no encontrado' })
-    }
-
-    try {
-        await fs.promises.writeFile(route, JSON.stringify(arrayProducts, null, 2))
-        return arrayProducts
-    } catch (err) {
-        console.log("Error al guardar: ", err)
     }
 }
 
