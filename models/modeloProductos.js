@@ -3,6 +3,8 @@ const path = require("path")
 
 const route = path.join(__dirname, "../data/productos.txt")
 
+
+
 const getProducts = async () => {
     try {
         const result = await fs.promises.readFile(route, 'utf-8')
@@ -13,6 +15,8 @@ const getProducts = async () => {
         return JSON.parse(result)
     }
 }
+
+
 
 const saveProduct = async (product) => {
     const { nombre, descripcion, codigo, url, precio, stock } = product
@@ -37,6 +41,7 @@ const saveProduct = async (product) => {
         console.log("Error al guardar: ", err)
     }
 }
+
 
 
 const updateProduct = async (product, ident) => {
@@ -64,8 +69,41 @@ const updateProduct = async (product, ident) => {
 
 
 
+const deleteProduct = async (ident) => {
+    const arrayProducts = await getProducts()
+    const id = parseInt(ident.id)
+    const borrado = JSON.stringify(arrayProductos.splice(parseInt(id) - 1, 1))
+    if (borrado) {
+        try {
+            await fs.promises.writeFile(route, JSON.stringify(arrayProducts, null, 2))
+            return ({ estado: 'producto eliminado' })
+        } catch (err) {
+            console.log("Error al guardar: ", err)
+        }
+    } else {
+        return ({ error: 'producto no encontrado' })
+    }
+}
+
+
+
+const getProductById = async (ident) => {
+    const arrayProducts = await getProducts()
+    const id = parseInt(ident.id)
+    const hallado = (arrayProducts.find(e => e.id === id))
+    if (hallado) {
+        return hallado
+    } else {
+        return ({ error: 'producto no encontrado' })
+    }
+}
+
+
+
 module.exports = {
     getProducts,
     saveProduct,
-    updateProduct
+    updateProduct,
+    deleteProduct,
+    getProductById
 }

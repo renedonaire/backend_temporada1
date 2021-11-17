@@ -3,7 +3,7 @@ const { Router } = require('express')
 const routerProductos = Router()
 const app = express()
 const admin = require('../data/userLevel')
-const { saveProduct, getProducts, updateProduct } = require('../models/modeloProductos')
+const { saveProduct, getProducts, updateProduct, deleteProduct, getProductById } = require('../models/modeloProductos')
 
 
 app.use(express.urlencoded({ extended: true }))
@@ -17,13 +17,9 @@ routerProductos.get('/', async (req, res) => {
 
 
 routerProductos.get('/:id', async (req, res) => {
-  const { id } = req.params
-  const arrayProductos = await getProducts()
-  const result = arrayProductos[parseInt(id) - 1]
-  result ?
-    res.json({ result })
-    :
-    res.json({ error: 'producto no encontrado' })
+  const ident = req.params
+  const response = await getProductById(ident)
+  res.json(response)
 })
 
 
@@ -53,14 +49,12 @@ routerProductos.put('/:id', async (req, res) => {
 })
 
 
-routerProductos.delete('/:id', (req, res) => {
+routerProductos.delete('/:id', async (req, res) => {
   if (admin) {
-    const { id } = req.params
-    const [borrado] = arrayProductos.splice(parseInt(id) - 1, 1)
-    borrado ?
-      res.json({ eliminado: borrado })
-      :
-      res.json({ error: 'producto no encontrado' })
+    const product = req.body
+    const ident = req.params
+    const response = await deleteProduct(ident)
+    res.json(response)
   } else {
     const response = { error: '-1', descripcion: "ruta '/api/productos' método 'DELETE' no autorizada" }
     res.json(response)
