@@ -94,8 +94,8 @@ const updateProduct = async (product, ident) => {
 
 
 
-const deleteProduct = async (ident) => {
-    const arrayCarts = await getProducts()
+const deleteCart = async (ident) => {
+    const arrayCarts = await getCarts()
     const id = parseInt(ident.id)
     const index = arrayCarts.findIndex(e => e.id === id)
 
@@ -103,25 +103,25 @@ const deleteProduct = async (ident) => {
         try {
             const borrado = arrayCarts.filter(e => e.id != id)
             await fs.promises.writeFile(route, JSON.stringify(borrado, null, 2))
-            return ({ estado: 'producto eliminado' })
+            return ({ estado: 'carrito eliminado' })
         } catch (err) {
             console.log("Error al guardar: ", err)
         }
     } else {
-        return ({ error: 'producto no encontrado' })
+        return ({ error: 'carrito no encontrado' })
     }
 }
 
 
 
-const getProductById = async (ident) => {
-    const arrayCarts = await getProducts()
+const getCartProductsById = async (ident) => {
+    const arrayCarts = await getCarts()
     const id = parseInt(ident.id)
     const hallado = (arrayCarts.find(e => e.id === id))
     if (hallado) {
-        return hallado
+        return hallado.productos
     } else {
-        return ({ error: 'producto no encontrado' })
+        return ({ error: 'carrito no encontrado' })
     }
 }
 
@@ -130,5 +130,6 @@ const getProductById = async (ident) => {
 module.exports = {
     createCart,
     getCarts,
-
+    deleteCart,
+    getCartProductsById,
 }

@@ -58,7 +58,6 @@ routerProductos.put('/:id', async (req, res) => {
 routerProductos.delete('/:id', async (req, res) => {
   const admin = userLevel()
   if (admin) {
-    const product = req.body
     const ident = req.params
     const response = await deleteProduct(ident)
     res.json(response)

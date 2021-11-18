@@ -1,13 +1,17 @@
 [
   {
-    "id": 3,
-    "timestamp": "18/11/2021, 12:50:21",
-    "productos": []
-  },
-  {
     "id": 2,
     "timestamp": "18/11/2021, 12:50:18",
-    "productos": []
+    "productos": [  {
+    "id": 6,
+    "timestamp": "17/11/2021, 18:32:41",
+    "nombre": "6",
+    "descripcion": "6",
+    "codigo": "6",
+    "url": "6",
+    "precio": "6",
+    "stock": "6"
+  }]
   },
   {
     "id": 1,
