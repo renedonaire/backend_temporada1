@@ -1,3 +1,4 @@
+const res = require("express/lib/response")
 const fs = require("fs")
 const path = require("path")
 
@@ -47,21 +48,24 @@ const getCarts = async () => {
 const addProductById = async (cart, prod) => {
     const idProd = { "id": prod }
     const product = await getProductById(idProd)
-    console.log("product: ", product, " - tipo: ", typeof product);
+    const errorProd = JSON.stringify(product).search("error")
+    if (errorProd != -1) {
+        return { error: "producto no existe" }
+    }
 
-    // SALVAMOS el carro en una variable => getCartById
     const idCart = { "id": cart }
     const productosCarro = await getCartProductsById(idCart)
-    console.log("productosCarro: ", productosCarro, " - tipo: ", typeof productosCarro);
+    const errorCarro = JSON.stringify(productosCarro).search("error")
+    if (errorCarro != -1) {
+        return { error: "carrito no existe" }
+    }
 
-    // CALCULAMOS EL CAMBIO  a una variable 
     let actualizado = []
     productosCarro.forEach(e => actualizado.push(e))
     actualizado.push(product)
-    console.log("actualizado: ", actualizado);
 
-    // LO ACTUALIZAMOS => updateCart
     const response = await updateCart(actualizado, cart)
+    return response
 }
 
 
@@ -81,12 +85,12 @@ const updateCart = async (cart, ident) => {
         arrayCarts[index] = updated
         try {
             await fs.promises.writeFile(routeCarts, JSON.stringify(arrayCarts, null, 2))
-            return ({ estado: 'actualizado' })
+            return ({ estado: 'producto agregado' })
         } catch (err) {
             console.log("Error al guardar: ", err)
         }
     } else {
-        return ({ error: 'carrito no encontrado' })
+        return ({ error: 'no se halló carrito' })
     }
 }
 
