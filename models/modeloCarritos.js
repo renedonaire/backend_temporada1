@@ -1,7 +1,8 @@
 const fs = require("fs")
 const path = require("path")
 
-const route = path.join(__dirname, "../data/carritos.txt")
+const { getProductById } = require('./modeloProductos')
+const routeCarts = path.join(__dirname, "../data/carritos.txt")
 
 
 
@@ -21,7 +22,7 @@ const createCart = async () => {
     arrayCarts.unshift(nuevo)
 
     try {
-        await fs.promises.writeFile(route, JSON.stringify(arrayCarts, null, 2))
+        await fs.promises.writeFile(routeCarts, JSON.stringify(arrayCarts, null, 2))
         return { estado: 'carrito creado - ', ident }
     } catch (err) {
         console.log("Error al guardar: ", err)
@@ -32,49 +33,46 @@ const createCart = async () => {
 
 const getCarts = async () => {
     try {
-        const result = await fs.promises.readFile(route, 'utf-8')
+        const result = await fs.promises.readFile(routeCarts, 'utf-8')
         return JSON.parse(result)
     } catch (err) {
-        await fs.promises.writeFile(route, JSON.stringify([], null, 2))
-        const result = await fs.promises.readFile(route, 'utf-8')
+        await fs.promises.writeFile(routeCarts, JSON.stringify([], null, 2))
+        const result = await fs.promises.readFile(routeCarts, 'utf-8')
         return JSON.parse(result)
     }
 }
 
 
 
-const saveProduct = async (product) => {
-    const { nombre, descripcion, codigo, url, precio, stock } = product
-    const stamp = new Date().toLocaleString("en-GB")
-    const arrayCarts = await getProducts()
-    let ident = 0
-    let indexArray = []
-    arrayCarts.forEach(element => indexArray.push(element.id))
-    if (indexArray.length > 0) {
-        const arraySorted = indexArray.sort((a, b) => (b - a))
-        ident = arraySorted[0] + 1
-    } else {
-        ident = 1
-    }
-    const response = { id: ident, timestamp: stamp, nombre: nombre, descripcion: descripcion, codigo: codigo, url: url, precio: precio, stock: stock }
-    arrayCarts.unshift(response)
+const addProductById = async (cart, prod) => {
+    const idProd = { "id": prod }
+    const product = await getProductById(idProd)
+    console.log("product: ", product, " - tipo: ", typeof product);
 
-    try {
-        await fs.promises.writeFile(route, JSON.stringify(arrayCarts, null, 2))
-        return { estado: 'producto agregado' }
-    } catch (err) {
-        console.log("Error al guardar: ", err)
-    }
+    // SALVAMOS el carro en una variable => getCartById
+    const idCart = { "id": cart }
+    const productosCarro = await getCartProductsById(idCart)
+    console.log("productosCarro: ", productosCarro, " - tipo: ", typeof productosCarro);
+
+    // CALCULAMOS EL CAMBIO  a una variable 
+    let actualizado = []
+    productosCarro.forEach(e => actualizado.push(e))
+    actualizado.push(product)
+    console.log("actualizado: ", actualizado);
+
+    // LO ACTUALIZAMOS => updateCart
+    const response = await updateCart(actualizado, cart)
 }
 
 
 
-const updateProduct = async (product, ident) => {
-    const arrayCarts = await getProducts()
-    const id = parseInt(ident.id)
-    const { nombre, descripcion, codigo, url, precio, stock } = product
+const updateCart = async (cart, ident) => {
+    const arrayCarts = await getCarts()
+    const id = parseInt(ident)
+    const productos = cart
     const stamp = new Date().toLocaleString("en-GB")
-    const updated = { id: id, timestamp: stamp, nombre: nombre, descripcion: descripcion, codigo: codigo, url: url, precio: precio, stock: stock }
+    const updated = { id: id, timestamp: stamp, productos: productos }
+    console.log("updated: ", updated);
 
     const actualizado = JSON.stringify(arrayCarts.find(e => e.id === id))
     const index = arrayCarts.findIndex(e => e.id === id)
@@ -82,13 +80,13 @@ const updateProduct = async (product, ident) => {
     if (actualizado) {
         arrayCarts[index] = updated
         try {
-            await fs.promises.writeFile(route, JSON.stringify(arrayCarts, null, 2))
+            await fs.promises.writeFile(routeCarts, JSON.stringify(arrayCarts, null, 2))
             return ({ estado: 'actualizado' })
         } catch (err) {
             console.log("Error al guardar: ", err)
         }
     } else {
-        return ({ error: 'producto no encontrado' })
+        return ({ error: 'carrito no encontrado' })
     }
 }
 
@@ -102,7 +100,7 @@ const deleteCart = async (ident) => {
     if (index != -1) {
         try {
             const borrado = arrayCarts.filter(e => e.id != id)
-            await fs.promises.writeFile(route, JSON.stringify(borrado, null, 2))
+            await fs.promises.writeFile(routeCarts, JSON.stringify(borrado, null, 2))
             return ({ estado: 'carrito eliminado' })
         } catch (err) {
             console.log("Error al guardar: ", err)
@@ -127,9 +125,25 @@ const getCartProductsById = async (ident) => {
 
 
 
+const getCartById = async (ident) => {
+    const arrayCarts = await getCarts()
+    const id = parseInt(ident.id)
+    const hallado = (arrayCarts.find(e => e.id === id))
+    if (hallado) {
+        return hallado
+    } else {
+        return ({ error: 'carrito no encontrado' })
+    }
+}
+
+
+
 module.exports = {
     createCart,
     getCarts,
     deleteCart,
     getCartProductsById,
+    addProductById,
+    getCartById,
+    updateCart
 }

@@ -2,7 +2,7 @@ const express = require('express')
 const { Router } = require('express')
 const routerCarritos = Router()
 const app = express()
-const { getCarts, createCart, deleteCart, getCartProductsById } = require('../models/modeloCarritos')
+const { getCarts, createCart, deleteCart, getCartProductsById, addProductById } = require('../models/modeloCarritos')
 
 
 app.use(express.urlencoded({ extended: true }))
@@ -27,6 +27,15 @@ routerCarritos.get('/:id/productos', async (req, res) => {
 
 routerCarritos.post('/', async (req, res) => {
     const response = await createCart()
+    res.json(response)
+})
+
+
+
+routerCarritos.post('/:id/productos/:id_prod', async (req, res) => {
+    const cart = req.params.id
+    const prod = req.params.id_prod
+    const response = await addProductById(cart, prod)
     res.json(response)
 })
 

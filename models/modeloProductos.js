@@ -1,17 +1,17 @@
 const fs = require("fs")
 const path = require("path")
 
-const route = path.join(__dirname, "../data/productos.txt")
+const routeProducts = path.join(__dirname, "../data/productos.txt")
 
 
 
 const getProducts = async () => {
     try {
-        const result = await fs.promises.readFile(route, 'utf-8')
+        const result = await fs.promises.readFile(routeProducts, 'utf-8')
         return JSON.parse(result)
     } catch (err) {
-        await fs.promises.writeFile(route, JSON.stringify([], null, 2))
-        const result = await fs.promises.readFile(route, 'utf-8')
+        await fs.promises.writeFile(routeProducts, JSON.stringify([], null, 2))
+        const result = await fs.promises.readFile(routeProducts, 'utf-8')
         return JSON.parse(result)
     }
 }
@@ -35,7 +35,7 @@ const saveProduct = async (product) => {
     arrayProducts.unshift(response)
 
     try {
-        await fs.promises.writeFile(route, JSON.stringify(arrayProducts, null, 2))
+        await fs.promises.writeFile(routeProducts, JSON.stringify(arrayProducts, null, 2))
         return { estado: 'producto agregado' }
     } catch (err) {
         console.log("Error al guardar: ", err)
@@ -57,7 +57,7 @@ const updateProduct = async (product, ident) => {
     if (actualizado) {
         arrayProducts[index] = updated
         try {
-            await fs.promises.writeFile(route, JSON.stringify(arrayProducts, null, 2))
+            await fs.promises.writeFile(routeProducts, JSON.stringify(arrayProducts, null, 2))
             return ({ estado: 'actualizado' })
         } catch (err) {
             console.log("Error al guardar: ", err)
@@ -77,7 +77,7 @@ const deleteProduct = async (ident) => {
     if (index != -1) {
         try {
             const borrado = arrayProducts.filter(e => e.id != id)
-            await fs.promises.writeFile(route, JSON.stringify(borrado, null, 2))
+            await fs.promises.writeFile(routeProducts, JSON.stringify(borrado, null, 2))
             return ({ estado: 'producto eliminado' })
         } catch (err) {
             console.log("Error al guardar: ", err)
