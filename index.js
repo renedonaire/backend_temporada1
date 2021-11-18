@@ -19,7 +19,7 @@ app.use('/api/productos', routerProductos)
 app.use('/carrito', (req, res) => {
     res.render('carrito')
 })
-app.use('api/carrito', routerCarritos)
+app.use('/api/carrito', routerCarritos)
 
 
 
