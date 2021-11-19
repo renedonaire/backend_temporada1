@@ -3,7 +3,8 @@
 ## Ruta '/api/productos/' 
 ### Ajuste nivel de user: folder 'data' - archivo 'userLevel.js'
 
-- GET: '/'  Lista todos los productos disponibles (disponible para usuarios y administradores)
+- GET: '/'  
+Lista todos los productos disponibles (disponible para usuarios y administradores)
 
 GET: '/:id'
 Obtiene un producto por su id (disponible para usuarios y administradores)
