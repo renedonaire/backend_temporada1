@@ -23,3 +23,20 @@ pues 'id' y 'timestamp' son agregados automáticamente.
   
 - DELETE: '/:id'  
 Borra un producto por su id (disponible para administradores)  
+  
+  
+  ## Ruta '/api/carrito/'
+- POST: '/'  
+Crea un carrito y devuelve su id.  
+  
+- DELETE: '/:id'  
+Elimina el carrito por 'id'  
+  
+- GET: '/:id/productos'  
+Lista todos los productos guardados en el carrito 'id'  
+  
+- POST: '/:id/productos/:id_prod'  
+Agrega el producto 'id_prod' al carrito 'id'  
+  
+- DELETE: '/:id/productos/:id_prod'  
+Elimina el producto 'id_prod' del carrito 'id'.  
