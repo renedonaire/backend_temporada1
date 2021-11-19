@@ -11,7 +11,46 @@
   },
   {
     "id": 1,
-    "timestamp": "18/11/2021, 16:33:43",
-    "productos": []
+    "timestamp": "18/11/2021, 22:30:32",
+    "productos": [ {
+    "id": 4,
+    "timestamp": "17/11/2021, 18:32:24",
+    "nombre": "4",
+    "descripcion": "4",
+    "codigo": "4",
+    "url": "4",
+    "precio": "4",
+    "stock": "4"
+  },
+  {
+    "id": 3,
+    "timestamp": "17/11/2021, 18:32:19",
+    "nombre": "3",
+    "descripcion": "3",
+    "codigo": "3",
+    "url": "3",
+    "precio": "3",
+    "stock": "3"
+  },
+  {
+    "id": 2,
+    "timestamp": "17/11/2021, 18:32:12",
+    "nombre": "2",
+    "descripcion": "2",
+    "codigo": "2",
+    "url": "2",
+    "precio": "2",
+    "stock": "2"
+  },
+  {
+    "id": 1,
+    "timestamp": "17/11/2021, 18:32:05",
+    "nombre": "1",
+    "descripcion": "1",
+    "codigo": "1",
+    "url": "1",
+    "precio": "1",
+    "stock": "1"
+  } ]
   }
 ]

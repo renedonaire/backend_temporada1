@@ -76,7 +76,6 @@ const updateCart = async (cart, ident) => {
     const productos = cart
     const stamp = new Date().toLocaleString("en-GB")
     const updated = { id: id, timestamp: stamp, productos: productos }
-    console.log("updated: ", updated);
 
     const actualizado = JSON.stringify(arrayCarts.find(e => e.id === id))
     const index = arrayCarts.findIndex(e => e.id === id)
@@ -91,6 +90,34 @@ const updateCart = async (cart, ident) => {
         }
     } else {
         return ({ error: 'no se halló carrito' })
+    }
+}
+
+
+
+const deleteProductById = async (cart, ident) => {
+    const arrayCarts = await getCarts()
+    const stamp = new Date().toLocaleString("en-GB")
+    const id = parseInt(ident)
+
+    const index = arrayCarts.findIndex(e => e.id == cart)
+    if ((index === -1)) {
+        return ({ error: 'carrito no existe' })
+    }
+
+    const indice = arrayCarts[index].productos.findIndex(e => e.id == id)
+    if ((indice === -1)) {
+        return ({ error: 'producto no existe en el carrito' })
+    }
+
+    try {
+        const newProduct = arrayCarts[index].productos.filter(e => e.id != id)
+        arrayCarts[index].productos = newProduct
+        arrayCarts[index].timestamp = stamp
+        await fs.promises.writeFile(routeCarts, JSON.stringify(arrayCarts, null, 2))
+        return ({ estado: 'producto eliminado' })
+    } catch (err) {
+        console.log("Error al guardar: ", err)
     }
 }
 
@@ -149,5 +176,6 @@ module.exports = {
     getCartProductsById,
     addProductById,
     getCartById,
-    updateCart
+    updateCart,
+    deleteProductById
 }

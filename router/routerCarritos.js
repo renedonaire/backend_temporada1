@@ -2,7 +2,7 @@ const express = require('express')
 const { Router } = require('express')
 const routerCarritos = Router()
 const app = express()
-const { getCarts, createCart, deleteCart, getCartProductsById, addProductById } = require('../models/modeloCarritos')
+const { getCarts, createCart, deleteCart, getCartProductsById, addProductById, deleteProductById } = require('../models/modeloCarritos')
 
 
 app.use(express.urlencoded({ extended: true }))
@@ -41,18 +41,18 @@ routerCarritos.post('/:id/productos/:id_prod', async (req, res) => {
 
 
 
-routerCarritos.put('/:id', async (req, res) => {
-    const product = req.body
+routerCarritos.delete('/:id', async (req, res) => {
     const ident = req.params
-    const response = await updateProduct(product, ident)
+    const response = await deleteCart(ident)
     res.json(response)
 })
 
 
 
-routerCarritos.delete('/:id', async (req, res) => {
-    const ident = req.params
-    const response = await deleteCart(ident)
+routerCarritos.delete('/:id/productos/:id_prod', async (req, res) => {
+    const cart = req.params.id
+    const prod = req.params.id_prod
+    const response = await deleteProductById(cart, prod)
     res.json(response)
 })
 
