@@ -21,7 +21,14 @@ app.use('/carrito', (req, res) => {
 })
 app.use('/api/carrito', routerCarritos)
 
+app.get('*', function (req, res) {
+    res.render('home')
+})
 
+// Por defecto - rutas no válidas
+app.use(function (req, res) {
+    res.json({ error: 'ruta no implementada' })
+})
 
 const PORT = 8080
 const server = app.listen(PORT, () => {
