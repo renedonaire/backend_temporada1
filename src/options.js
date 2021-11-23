@@ -2,9 +2,9 @@ const mysql = {
     client: 'mysql',
     connection: {
         host: 'localhost',
-        user: 'root',
-        password: 'root',
-        database: 'testDb'
+        user: 'coder',
+        password: 'coder',
+        database: 'storage/productos.mdb'
     }
 }
 

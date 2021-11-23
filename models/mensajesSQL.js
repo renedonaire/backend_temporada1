@@ -1,4 +1,3 @@
-// import knex from 'knex';
 const knex = require('knex')
 
 
@@ -14,7 +13,7 @@ class Mensajes {
                     table.increments('id').primary();
                     table.string('autor', 50).notNullable();
                     table.string('texto', 100).notNullable();
-                    table.date('fecha', new Date())
+                    table.string('fecha', 50).notNullable();
                 })
             })
     }
@@ -32,5 +31,4 @@ class Mensajes {
     }
 }
 
-// export default Animales
 module.exports = { Mensajes }

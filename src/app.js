@@ -29,10 +29,30 @@ app.use('/', routerProductos)
 
 /* --------------------------- Crea bases de datos -------------------------- */
 const { Mensajes } = require('../models/mensajesSQL')
+const { Productos } = require('../models/productosMariaDB')
 const { sqlite3 } = require('./options')
+const { mysql } = require('./options')
 
 const arrayMensajes = [
     { autor: 'server:', texto: 'Bienvenido', fecha: "" }
+]
+
+const arrayProductos = [
+    {
+        "title": "La Vuelta al Mundo en 80 días",
+        "price": 15900,
+        "thumbnail": "https://www.antartica.cl/media/catalog/product/9/7/9788417127916_1.png?quality=80&bg-color=255,255,255&fit=bounds&height=700&width=700&canvas=700:700&format=jpeg",
+    },
+    {
+        "title": "Primera Persona Del Singular",
+        "price": 19900,
+        "thumbnail": "https://www.antartica.cl/media/catalog/product/9/7/9789569961212_1.png?quality=80&bg-color=255,255,255&fit=bounds&height=700&width=700&canvas=700:700&format=jpeg",
+    },
+    {
+        "title": "Ajuste De Cuentas",
+        "price": 15000,
+        "thumbnail": "https://www.antartica.cl/media/catalog/product/9/7/9789569646867_1.png?quality=80&bg-color=255,255,255&fit=bounds&height=700&width=700&canvas=700:700&format=jpeg",
+    }
 ]
 
 const mensajes = new Mensajes(sqlite3)
@@ -52,6 +72,26 @@ mensajes.crearTablaMensajes()
     })
     .finally(() => {
         mensajes.cerrarBDMensajes()
+    })
+
+
+const productos = new Productos(mysql)
+productos.crearTablaProductos()
+    .then(() => console.log('Tabla Productos creada'))
+    .then(() => {
+        return productos.insertarProductos(arrayProductos)
+    })
+    .then(() => {
+        return productos.listarProductos()
+    })
+    .then(listado => {
+        console.table(listado)
+    })
+    .catch((err) => {
+        console.log(err)
+    })
+    .finally(() => {
+        productos.cerrarBDProductos()
     })
 
 
