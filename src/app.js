@@ -1,10 +1,10 @@
 const express = require('express')
 const exphbs = require('express-handlebars')
-const routerProductos = require('./router/routerProductos')
+const routerProductos = require('../router/routerProductos')
 const { Server: HTTPServer } = require('http')
 const { Server: SocketServer } = require('socket.io')
-const { getMessages, saveMessage } = require('./models/mensajes')
-const { getProducts, saveProduct } = require('./models/productos')
+const { getMessages, saveMessage } = require('../models/mensajes')
+const { getProducts, saveProduct } = require('../models/productos')
 
 
 const app = express()
@@ -55,3 +55,36 @@ const server = httpServer.listen(PORT, () => {
 })
 
 server.on('error', error => console.log(`Error en servidor: ${error}`))
+
+
+// import mensajesSQL from '../models/mensajesSQL'
+const { Mensajes } = require('../models/mensajesSQL')
+// import { mysql as options } from './options.js'
+// import { sqlite3 as options } from './options.js'
+const { sqlite3 } = require('./options')
+
+const arrayMensajes = [
+    { tipo: 'Perro', nombre: 'Firulais', edad: 5 },
+    { tipo: 'Gato', nombre: 'Michi', edad: 3 },
+    { tipo: 'Loro', nombre: 'Pedro', edad: 8 },
+    { tipo: 'Caballo', nombre: 'Flecha Negra', edad: 9 },
+]
+
+const mensajes = new Mensajes(sqlite3)
+mensajes.crearTabla()
+    .then(() => console.log('Tabla mensajes creada con éxito'))
+    .then(() => {
+        return mensajes.insertar(arrayMensajes)
+    })
+    .then(() => {
+        return mensajes.listar()
+    })
+    .then(listado => {
+        console.table(listado)
+    })
+    .catch((err) => {
+        console.log(err)
+    })
+    .finally(() => {
+        mensajes.cerrarBD()
+    })
