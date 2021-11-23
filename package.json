@@ -1,5 +1,5 @@
 {
-  "name": "entrega_5",
+  "name": "entrega_8",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -12,7 +12,6 @@
   "dependencies": {
     "express": "^4.17.1",
     "express-handlebars": "^5.3.4",
-    "socket.io": "^4.3.1",
-    "type": "module"
+    "socket.io": "^4.3.1"
   }
 }
