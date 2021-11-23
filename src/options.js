@@ -11,9 +11,8 @@ const mysql = {
 
 const sqlite3 = {
     client: 'sqlite3',
-    connection: { filename: './zoo.sqlite3' },
+    connection: { filename: 'storage/mensajes.sqlite3' },
     useNullAsDefault: true
 }
 
-// export { mysql, sqlite3 }
 module.exports = { mysql, sqlite3 }

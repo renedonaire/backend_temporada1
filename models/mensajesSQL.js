@@ -7,7 +7,7 @@ class Mensajes {
         this.knex = knex(config);
     }
 
-    crearTabla() {
+    crearTablaMensajes() {
         return this.knex.schema.dropTableIfExists('mensajes')
             .then(() => {
                 return this.knex.schema.createTable('mensajes', table => {
@@ -19,15 +19,15 @@ class Mensajes {
             })
     }
 
-    cerrarBD() {
+    cerrarBDMensajes() {
         return this.knex.destroy()
     }
 
-    insertar(mensajes) {
+    insertarMensajes(mensajes) {
         return this.knex('mensajes').insert(mensajes)
     }
 
-    listar() {
+    listarMensajes() {
         return this.knex('mensajes').select('*')
     }
 }
