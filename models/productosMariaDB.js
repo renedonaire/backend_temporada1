@@ -11,9 +11,9 @@ class Productos {
             .then(() => {
                 return this.knex.schema.createTable('productos', table => {
                     table.increments('id').primary();
-                    table.string('title', 100).notNullable();
+                    table.string('title', 1000).notNullable();
                     table.integer('price').notNullable();
-                    table.string('thumbnail', 100).notNullable();
+                    table.string('thumbnail', 1000).notNullable();
                 })
             })
     }
