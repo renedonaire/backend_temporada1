@@ -10,21 +10,6 @@ socket.on('products', data => {
 
 
 
-function addProduct() {
-    const product = {
-        title: document.getElementById('title').value,
-        price: document.getElementById('price').value,
-        thumbnail: document.getElementById('thumbnail').value
-    }
-    socket.emit('new-product', product)
-    document.getElementById('title').value = ''
-    document.getElementById('price').value = ''
-    document.getElementById('thumbnail').value = ''
-    return false
-}
-
-
-
 const addMessage = () => {
     const usuario = document.getElementById('email').value
     const fecha = new Date().toLocaleString("en-GB")
@@ -58,6 +43,21 @@ const renderMessages = (messages) => {
         html = "No hay mensajes"
     }
     document.getElementById('mensajes').innerHTML = html
+}
+
+
+
+function addProduct() {
+    const product = {
+        title: document.getElementById('title').value,
+        price: document.getElementById('price').value,
+        thumbnail: document.getElementById('thumbnail').value
+    }
+    socket.emit('new-product', product)
+    document.getElementById('title').value = ''
+    document.getElementById('price').value = ''
+    document.getElementById('thumbnail').value = ''
+    return false
 }
 
 

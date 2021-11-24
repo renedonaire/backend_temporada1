@@ -3,9 +3,11 @@ const express = require('express')
 const exphbs = require('express-handlebars')
 const { Server: HTTPServer } = require('http')
 const { Server: SocketServer } = require('socket.io')
-const routerProductos = require('../router/routerProductos')
-const { getMessages, saveMessage } = require('../models/mensajes')
-const { getProducts, saveProduct } = require('../models/productos')
+// const routerProductos = require('../router/routerProductos')
+const { Mensajes } = require('../models/mensajesSQL')
+const { Productos } = require('../models/productosMariaDB')
+const { sqlite3 } = require('./options')
+const { mysql } = require('./options')
 
 const app = express()
 const httpServer = new HTTPServer(app)
@@ -23,16 +25,13 @@ app.engine('hbs', exphbs({
 }))
 app.set('view engine', 'hbs')
 
-app.use('/', routerProductos)
-
+app.get('/', async (req, res) => {
+    const listaProductos = await productos.listarProductos()
+    res.render('list', { list: listaProductos })
+})
 
 
 /* --------------------------- Crea bases de datos -------------------------- */
-const { Mensajes } = require('../models/mensajesSQL')
-const { Productos } = require('../models/productosMariaDB')
-const { sqlite3 } = require('./options')
-const { mysql } = require('./options')
-
 const arrayMensajes = [
     { autor: 'server:', texto: 'Bienvenido', fecha: "" }
 ]
@@ -57,41 +56,23 @@ const arrayProductos = [
 
 const mensajes = new Mensajes(sqlite3)
 mensajes.crearTablaMensajes()
-    .then(() => console.log('Tabla Mensajes creada'))
     .then(() => {
         return mensajes.insertarMensajes(arrayMensajes)
     })
-    .then(() => {
-        return mensajes.listarMensajes()
-    })
-    .then(listado => {
-        console.table(listado)
-    })
+    .then(() => console.log('Tabla Mensajes creada'))
     .catch((err) => {
         console.log(err)
-    })
-    .finally(() => {
-        mensajes.cerrarBDMensajes()
     })
 
 
 const productos = new Productos(mysql)
 productos.crearTablaProductos()
-    .then(() => console.log('Tabla Productos creada'))
     .then(() => {
         return productos.insertarProductos(arrayProductos)
     })
-    .then(() => {
-        return productos.listarProductos()
-    })
-    .then(listado => {
-        console.table(listado)
-    })
+    .then(() => console.log('Tabla Productos creada'))
     .catch((err) => {
         console.log(err)
-    })
-    .finally(() => {
-        productos.cerrarBDProductos()
     })
 
 
@@ -100,21 +81,21 @@ productos.crearTablaProductos()
 io.on('connection', async socket => {
     console.log('Nuevo cliente conectado')
 
-    const messages = await getMessages()
+    const messages = await mensajes.listarMensajes()
     socket.emit('messages', messages)
 
-    const products = getProducts()
+    const products = await productos.listarProductos()
     socket.emit('products', products)
 
     socket.on('new-message', async message => {
-        await saveMessage(message)
-        const allMessages = await getMessages()
+        await mensajes.insertarMensajes(message)
+        const allMessages = await mensajes.listarMensajes()
         io.sockets.emit('messages', allMessages)
     })
 
-    socket.on('new-product', product => {
-        saveProduct(product)
-        const allProducts = getProducts()
+    socket.on('new-product', async product => {
+        await productos.insertarProductos(product)
+        const allProducts = await productos.listarProductos()
         io.sockets.emit('products', allProducts)
     })
 })
