@@ -1,0 +1,25 @@
+{
+  "name": "segunda_entrega",
+  "version": "1.0.0",
+  "description": "Segunda Entrega",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/renedonaire/backend.git"
+  },
+  "author": "renedonaire",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/renedonaire/backend/issues"
+  },
+  "homepage": "https://github.com/renedonaire/backend#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "firebase-admin": "^10.0.0",
+    "mongodb": "^4.2.1",
+    "mongoose": "^6.0.14"
+  }
+}
