@@ -1,6 +1,6 @@
 
 import express from 'express'
-import { personasRouter } from './routers/personasRouter.js'
+import { personasRouter } from './src/routers/personasRouter.js'
 
 const app = express()
 
