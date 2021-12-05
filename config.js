@@ -1,4 +1,4 @@
-// elegir tu persistencia acá
+// El valor de esta variable determina el tipo de persistencia
 const PERS = 'mongodb'
 
 export default {

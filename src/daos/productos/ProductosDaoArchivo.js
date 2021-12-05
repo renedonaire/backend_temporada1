@@ -1,10 +1,11 @@
 import ContenedorArchivo from "../../contenedores/ContenedorArchivo.js"
 
-class PersonasDaoArchivo extends ContenedorArchivo {
+class ProductosDaoArchivo extends ContenedorArchivo {
 
     constructor(rutaDir) {
         super(`${rutaDir}/personas.json`)
     }
 }
 
-export default PersonasDaoArchivo
+
+export default ProductosDaoArchivo

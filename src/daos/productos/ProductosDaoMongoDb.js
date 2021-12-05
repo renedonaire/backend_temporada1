@@ -1,6 +1,7 @@
 import ContenedorMongoDb from "../../contenedores/ContenedorMongoDb.js"
 
-class PersonasDaoMongoDb extends ContenedorMongoDb {
+
+class ProductosDaoMongoDb extends ContenedorMongoDb {
 
     constructor() {
         super('personas', {
@@ -11,4 +12,5 @@ class PersonasDaoMongoDb extends ContenedorMongoDb {
     }
 }
 
-export default PersonasDaoMongoDb
+
+export default ProductosDaoMongoDb

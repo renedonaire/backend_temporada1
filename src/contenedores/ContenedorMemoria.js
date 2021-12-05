@@ -18,14 +18,12 @@ class ContenedorMemoria {
     }
 
     guardar(elem) {
-
         let newId
         if (this.elementos.length == 0) {
             newId = 1
         } else {
             newId = this.elementos[this.elementos.length - 1].id + 1
         }
-
         const newElem = { ...elem, id: newId }
         this.elementos.push(newElem)
         return newElem
@@ -54,5 +52,6 @@ class ContenedorMemoria {
         this.elementos = []
     }
 }
+
 
 export default ContenedorMemoria

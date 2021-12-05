@@ -1,11 +1,15 @@
-
 import express from 'express'
-import { personasRouter } from './src/routers/personasRouter.js'
+import { productosRouter } from './src/routers/productosRouter.js'
+import { carritosRouter } from './src/routers/carritosRouter.js'
 
 const app = express()
 
+
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-app.use('/api/personas', personasRouter)
+
+app.use('/api/productos', productosRouter)
+app.use('/api/carritos', carritosRouter)
+
 
 export default app

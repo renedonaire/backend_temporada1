@@ -10,28 +10,23 @@ class ContenedorMongoDb {
     }
 
     async listar(id) {
-
     }
 
     async listarAll() {
-
     }
 
     async guardar(nuevoElem) {
-
     }
 
     async actualizar(nuevoElem) {
-
     }
 
     async borrar(id) {
-
     }
 
     async borrarAll() {
-
     }
 }
+
 
 export default ContenedorMongoDb

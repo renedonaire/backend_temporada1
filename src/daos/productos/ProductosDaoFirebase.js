@@ -1,10 +1,12 @@
 import ContenedorFirebase from "../../contenedores/ContenedorFirebase.js"
 
-class PersonasDaoFirebase extends ContenedorFirebase {
+
+class ProductosDaoFirebase extends ContenedorFirebase {
 
     constructor() {
         super('personas')
     }
 }
 
-export default PersonasDaoFirebase
+
+export default ProductosDaoFirebase
