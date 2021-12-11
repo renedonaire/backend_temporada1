@@ -12,6 +12,7 @@
   "dependencies": {
     "express": "^4.17.1",
     "express-handlebars": "^5.3.4",
+    "faker": "^5.5.3",
     "knex": "^0.95.14",
     "mysql": "^2.18.1",
     "socket.io": "^4.3.1",
