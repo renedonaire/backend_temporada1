@@ -1,0 +1,20 @@
+<h2>Lista de Productos</h2>
+<table id="productos">
+    <tr>
+        <th>Producto</th>
+        <th>Precio</th>
+        <th>Foto</th>
+    </tr>
+    {{#each list}}
+        <tr>
+            <td>{{product}}</td>
+            <td>{{price}}</td>
+            <td>
+                <img src="{{image}}" width="50" height="auto" alt="miniatura no disponible">
+            </td>
+        </tr>
+    {{else}}
+        <td>No hay productos</td>
+    {{/each}}
+</table>
+<hr>

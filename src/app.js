@@ -3,11 +3,11 @@ const express = require('express')
 const exphbs = require('express-handlebars')
 const { Server: HTTPServer } = require('http')
 const { Server: SocketServer } = require('socket.io')
-// const routerProductos = require('../router/routerProductos')
 const { Mensajes } = require('../models/mensajesSQL')
 const { Productos } = require('../models/productosMariaDB')
 const { sqlite3 } = require('./options')
 const { mysql } = require('./options')
+const { variosProductos } = require('../api/fakerApi')
 
 const app = express()
 const httpServer = new HTTPServer(app)
@@ -28,6 +28,11 @@ app.set('view engine', 'hbs')
 app.get('/', async (req, res) => {
     const listaProductos = await productos.listarProductos()
     res.render('list', { list: listaProductos })
+})
+
+app.get('/api/productos-test', async (req, res) => {
+    const listaProductos = await variosProductos(5)
+    res.render('listaTest', { list: listaProductos })
 })
 
 
