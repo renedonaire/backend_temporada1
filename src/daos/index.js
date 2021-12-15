@@ -4,7 +4,7 @@ import config from '../../config.js'
 let productosDao, carritosDao
 
 switch (config.PERS) {
-    case 'json':
+    case 'file':
         const { default: ProductosDaoArchivo } = await import('./productos/ProductosDaoArchivo.js')
         const { default: CarritosDaoArchivo } = await import('./carritos/CarritosDaoArchivo.js')
         productosDao = new ProductosDaoArchivo(config.fileSystem.path)

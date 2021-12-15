@@ -31,8 +31,6 @@ class ContenedorFirebase {
     async borrarAll() {
     }
 
-    async desconectar() {
-    }
 }
 
 
