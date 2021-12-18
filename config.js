@@ -1,12 +1,12 @@
 // El valor de esta variable determina el tipo de persistencia
-// Puede ser 'file', 'firebase', 'mongodb' o 'memoria'
+// Puede ser 'memoria', 'file', 'mongodb' o 'firebase'
 
-const PERS = 'memoria'
+const PERS = 'file'
 
 export default {
     PERS,
     fileSystem: {
-        path: './DB'
+        path: './storage'
     },
     mongodb: {
         cnxStr: 'srv+mongodb://xxxxxxxxxxxxxxxxxxx',
