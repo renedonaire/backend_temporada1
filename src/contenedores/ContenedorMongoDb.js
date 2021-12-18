@@ -30,7 +30,7 @@ class ContenedorMongoDb {
     }
 
     async actualizar(nuevoElem) {
-        const result = await client.db(this.baseDatos).collection(this.coleccion).updateOne({ _id: ObjectId(nuevoElem._id) }, { $set: { "producto": nuevoElem.producto, "precio": nuevoElem.precio } })
+        const result = await client.db(this.baseDatos).collection(this.coleccion).replaceOne({ _id: ObjectId(nuevoElem._id) }, { "data": nuevoElem.data })
         return result
     }
 
