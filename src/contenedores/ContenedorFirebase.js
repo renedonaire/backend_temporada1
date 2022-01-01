@@ -1,11 +1,20 @@
+import fs from 'fs'
 import admin from "firebase-admin"
-import config from '../config.js'
+import config from '../../config.js'
+
+const serviceAccount = JSON.parse(fs.readFileSync(config.firebase.cnxStr, 'utf8'))
 
 admin.initializeApp({
-    credential: admin.credential.cert(config.firebase)
+    credential: admin.credential.cert(serviceAccount)
 })
 
+console.log('conectado a firebase ', config.firebase.cnxStr)
+
 const db = admin.firestore()
+
+const asObj = doc => ({ id: doc.id, ...doc.data() })
+
+
 
 class ContenedorFirebase {
 

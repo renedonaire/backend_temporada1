@@ -1,0 +1,32 @@
+[
+  {
+    "producto": "arroz",
+    "precio": 1000,
+    "id": 1
+  },
+  {
+    "producto": "arroz",
+    "precio": 1000,
+    "id": 2
+  },
+  {
+    "producto": "arroz",
+    "precio": 1000,
+    "id": 3
+  },
+  {
+    "producto": "arroz",
+    "precio": 1000,
+    "id": 4
+  },
+  {
+    "producto": "arroz",
+    "precio": 1000,
+    "id": 5
+  },
+  {
+    "producto": "arroz",
+    "precio": 1000,
+    "id": 6
+  }
+]

@@ -1,7 +1,6 @@
 // El valor de esta variable determina el tipo de persistencia
 // Puede ser 'memoria', 'file', 'mongodb' o 'firebase'
-
-const PERS = 'mongodb'
+const PERS = 'firebase'
 
 export default {
     PERS,
@@ -17,5 +16,6 @@ export default {
         }
     },
     firebase: {
+        cnxStr: './src/daos/fbConnect.json'
     }
 }

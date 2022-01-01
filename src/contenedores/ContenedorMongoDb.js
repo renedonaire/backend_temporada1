@@ -14,7 +14,6 @@ class ContenedorMongoDb {
     }
 
     async listar(id) {
-        console.log(id);
         const result = await client.db(this.baseDatos).collection(this.coleccion).find({ _id: ObjectId(id) }).toArray()
         return result
     }
