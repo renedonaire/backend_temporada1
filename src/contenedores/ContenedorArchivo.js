@@ -11,7 +11,11 @@ class ContenedorArchivo {
     async listar(id) {
         const objs = await this.listarAll()
         const buscado = objs.find(o => o.id == id)
-        return buscado
+        if (buscado) {
+            return buscado
+        } else {
+            return { "Error": "Elemento no encontrado" }
+        }
     }
 
     async listarAll() {
@@ -35,9 +39,9 @@ class ContenedorArchivo {
         objs.push(newObj)
         try {
             await fs.writeFile(this.ruta, JSON.stringify(objs, null, 2))
-            return newObj
+            return { "Estado": "Guardado" }
         } catch (error) {
-            throw new Error(`Error al guardar: ${error}`)
+            return { "Error": `Error al guardar: ${error}` }
         }
     }
 
@@ -45,13 +49,14 @@ class ContenedorArchivo {
         const objs = await this.listarAll()
         const index = objs.findIndex(o => o.id == elem.id)
         if (index == -1) {
-            throw new Error(`Error al actualizar: no se encontró el id ${id}`)
+            return { "Error": `No se encontró el id ${elem.id}` }
         } else {
             objs[index] = elem
             try {
                 await fs.writeFile(this.ruta, JSON.stringify(objs, null, 2))
+                return { "Estado": "Actualizado" }
             } catch (error) {
-                throw new Error(`Error al actualizar: ${error}`)
+                return { "Error": `Error al actualizar ${error}` }
             }
         }
     }
@@ -60,22 +65,23 @@ class ContenedorArchivo {
         const objs = await this.listarAll()
         const index = objs.findIndex(o => o.id == id)
         if (index == -1) {
-            throw new Error(`Error al borrar: no se encontró el id ${id}`)
+            return { "Error": `No se encontró el id ${id}` }
         }
         const deleted = objs.splice(index, 1)[0]
         try {
             await fs.writeFile(this.ruta, JSON.stringify(objs, null, 2))
+            return { "Estado": "Eliminado" }
         } catch (error) {
-            throw new Error(`Error al borrar: ${error}`)
+            return { "Error": `Error al borrar ${error}` }
         }
-        return deleted
     }
 
     async borrarAll() {
         try {
             await fs.writeFile(this.ruta, JSON.stringify([], null, 2))
+            return { "Estado": "Borrado" }
         } catch (error) {
-            throw new Error(`Error al borrar todo: ${error}`)
+            return { "Error": `Error al borrar todo:  ${error}` }
         }
     }
 }

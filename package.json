@@ -8,6 +8,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon main.js"
   },
+  "nodemonConfig": {
+    "ignore": ["./storage/*.json"]
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/renedonaire/backend.git"

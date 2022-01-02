@@ -7,7 +7,7 @@ class ContenedorMemoria {
     listar(id) {
         const elem = this.elementos.find(elem => elem.id == id)
         if (!elem) {
-            throw new Error(`Error al listar: elemento no encontrado`)
+            return { "Error": "Elemento no encontrado" }
         } else {
             return elem
         }
@@ -26,25 +26,26 @@ class ContenedorMemoria {
         }
         const newElem = { ...elem, id: newId }
         this.elementos.push(newElem)
-        return newElem
+        return { "Estado": "Guardado", newId }
     }
 
     actualizar(elem) {
-        const index = this.elementos.findIndex(p => p.id == elem.id)
-        if (index == -1) {
-            throw new Error(`Error al actualizar: elemento no encontrado`)
+        const index = this.elementos.findIndex(p => p.id === parseInt(elem.id))
+        if (index === -1) {
+            return { "Error": "Elemento no encontrado" }
         } else {
             this.elementos[index] = elem
-            return elem
+            return { "Estado": "Actualizado" }
         }
     }
 
-    borrar(id) {
-        const index = this.elementos.findIndex(elem => elem.id == id)
-        if (index == -1) {
-            throw new Error(`Error al borrar: elemento no encontrado`)
+    async borrar(id) {
+        const index = await this.elementos.findIndex(elem => elem.id === parseInt(id))
+        if (index === -1) {
+            return { "Error": "Elemento no encontrado" }
         } else {
-            return this.elementos.splice(index, 1)[0]
+            const borrado = this.elementos.splice(index, 1)[0]
+            return { "Estado": "Eliminado" }
         }
     }
 
