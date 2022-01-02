@@ -1,6 +1,6 @@
 // El valor de esta variable determina el tipo de persistencia
 // Puede ser 'memoria', 'file', 'mongodb' o 'firebase'
-const PERS = 'firebase'
+const PERS = 'memoria'
 
 export default {
     PERS,
