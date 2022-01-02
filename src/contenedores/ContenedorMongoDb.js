@@ -38,6 +38,13 @@ class ContenedorMongoDb {
         return result
     }
 
+    async borrarAll() {
+        try {
+            await client.db(this.baseDatos).collection(this.coleccion).drop()
+        } catch (error) {
+            throw new Error(`Error al borrar todo: ${error}`)
+        }
+    }
 }
 
 

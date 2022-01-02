@@ -5,28 +5,28 @@
     "id": 1
   },
   {
-    "producto": "arroz",
-    "precio": 1000,
+    "producto": "fideos",
+    "precio": 2000,
     "id": 2
   },
   {
-    "producto": "arroz",
-    "precio": 1000,
+    "producto": "mermelada",
+    "precio": 3000,
     "id": 3
   },
   {
-    "producto": "arroz",
-    "precio": 1000,
+    "producto": "pollo",
+    "precio": 4000,
     "id": 4
   },
   {
-    "producto": "arroz",
-    "precio": 1000,
+    "producto": "carne",
+    "precio": 5000,
     "id": 5
   },
   {
-    "producto": "arroz",
-    "precio": 1000,
+    "producto": "torta",
+    "precio": 6000,
     "id": 6
   }
 ]
