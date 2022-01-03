@@ -23,41 +23,71 @@ class ContenedorFirebase {
     }
 
     async listar(id) {
-        const doc = await this.coleccion.doc(id).get()
-        return asObj(doc)
+        try {
+            const doc = await this.coleccion.doc(id).get()
+            const result = Object.entries(asObj(doc))
+            if (result.length > 1) {
+                return asObj(doc)
+            } else {
+                return { "Error": "No se encontró el elemento" }
+            }
+        } catch (error) {
+            return { "Error ": `${error}` }
+        }
     }
 
     async listarAll() {
-        const result = []
-        const snapshot = await this.coleccion.get()
-        snapshot.forEach(doc => {
-            result.push(asObj(doc))
-        })
-        return result
+        try {
+            const result = []
+            const snapshot = await this.coleccion.get()
+            snapshot.forEach(doc => {
+                result.push(asObj(doc))
+            })
+            return result
+        } catch (error) {
+            return { "Error ": `${error}` }
+        }
     }
 
     async guardar(nuevoElem) {
-        const guardado = await this.coleccion.add(nuevoElem)
-        return guardado.id
+        try {
+            const guardado = await this.coleccion.add(nuevoElem)
+            return { "Estado": "Guardado" }
+        } catch (error) {
+            return { "Error al guardar ": `${error}` }
+        }
     }
 
     async actualizar(nuevoElem) {
-        const nuevo = await this.coleccion.doc(nuevoElem.id).update(nuevoElem)
-        return { result: "actualizado" }
+        try {
+            const nuevo = await this.coleccion.doc(nuevoElem.id).update(nuevoElem)
+            return { "Estado": "Actualizado" }
+        } catch (error) {
+            return { "Error al actualizar ": `${error}` }
+        }
     }
 
     async borrar(id) {
-        const deleted = await this.coleccion.doc(id).delete()
-        return { eliminado: id }
+        try {
+            const deleted = await this.coleccion.doc(id).delete()
+            return { "Estado": "Eliminado" }
+        } catch (error) {
+            return { "Error al borrar ": `${error}` }
+        }
     }
 
     async borrarAll() {
-        await this.coleccion.get()
-            .then(res => {
-                res.forEach(element => {
-                    element.ref.delete()
+        try {
+            await this.coleccion.get()
+                .then(res => {
+                    res.forEach(element => {
+                        element.ref.delete()
+                    })
                 })
-            })
+            return { "Estado": "Eliminado" }
+        } catch (error) {
+            return { "Error al borrar ": `${error}` }
+        }
     }
 
 }
