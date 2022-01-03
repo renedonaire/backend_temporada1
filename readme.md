@@ -1,32 +1,54 @@
-## Segunda Entrega
+# Segunda Entrega
 
-### End Points
-**/api/productos**
-**/api/carritos**
+## Credenciales
+**MongoDB:**
+Se encuentra en el archivo *config.js*
 
-### Métodos  
-**get**
-Lista todos
-  
-**get/id**  
-Lista un elemento por su id  
-  
+**Firebase**
+Se encuentra en el archivo* ./src/daos/fbConnect.json*
 
+## End Points
+En el archivo *main.js*  se encuentra la configuración del puerto.
+- /api/productos/
+- /api/carritos/
 
-
-**Formato de Producto**
-
-    {
-    "producto": "arroz",
-    "precio": 1000
+## Formatos
+**Producto:**
+   ```json
+ {
+    	'id': (único, asignado al guardar el producto)
+    	'producto': string,
+    	'precio': number
     }
-*id es asignada al guardar el producto*
-
-
-**Formato de Carrito**
-
-    {
-	    "productos":[]
+```
+**Carrito:**
+   ```json
+ {
+    	'id': (único, asignado al guardar el carrito),
+    	'productos':
+    		[ (array de productos) ]
     }
-*id es asignada al guardar el carrito*
+```
 
+## Métodos
+#### /get
+Lista todos los productos / carritos
+
+#### get/id
+Devuelve un producto / carrito específico
+
+#### post
+Guarda un producto / carrito.
+**Requiere un producto / carrito sin 'id', ya que esta se asigna al momento de guardar.**
+
+#### put/id
+Actualiza un producto / carrito.
+**Requiere un producto / carrito correctamente formado, incluso con su correspondiente 'id'.**
+
+#### delete/id
+Elimina un producto / carrito específico.
+
+## To - Do
+- Validar formato de productos / carritos antes de guardar o actualizar.
+
+## Esquema de estructura
