@@ -52,3 +52,4 @@ Elimina un producto / carrito específico.
 - Validar formato de productos / carritos antes de guardar o actualizar.
 
 ## Esquema de estructura
+![Esquema](https://github.com/renedonaire/backend/blob/Segunda_Entrega/images/Segunda_Entrega.jpg "Esquema")
