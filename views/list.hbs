@@ -1,3 +1,13 @@
+<body>
+        <h2>Ingrese Producto</h2>
+        <form onsubmit="return addProduct(this)">
+            Title: <input type="text" id="title" />
+            Price: <input type="text" id="price" />
+            Thumbnail: <input type="text" id="thumbnail" />
+            <input type="submit" value="Agregar">
+        </form>
+        <hr>
+
 <h2>Lista de Productos</h2>
 <table id="productos">
     <tr>
@@ -18,3 +28,11 @@
     {{/each}}
 </table>
 <hr>
+
+        <form onsubmit="return addMessage(this)">
+            Usuario: <input type="text" id="email" placeholder="Tu email"><br>
+            Mensaje: <input type="text" id="texto" placeholder="Mensaje">
+            <input type="submit" value="Enviar">
+        </form>
+        <div id="mensajes"></div>
+    </body>
