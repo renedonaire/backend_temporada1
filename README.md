@@ -10,3 +10,6 @@ Debe existir una base de datos llamada 'Coderhouse_BD'
 - password: 'Coderhouse_123'  
 (se puede cambiar esta configuración en el archivo 'src/options.js')  
   
+## Status de faker.js
+Al 5 de enero de 2021, el repositorio de faker.js [https://github.com/marak/Faker.js/](https://github.com/marak/Faker.js/) ha sido eliminado, al parecer, por el autor.  
+Más información en [https://github.com/marak/Faker.js/](https://github.com/marak/Faker.js/)  
