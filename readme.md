@@ -2,10 +2,12 @@
 
 ## Credenciales
 **MongoDB:**
-Se encuentra en el archivo *config.js*
+Se encuentra en el archivo *config.js*  
+Actualmente usa la base de ejemplo del curso.
 
 **Firebase**
-Se encuentra en el archivo* ./src/daos/fbConnect.json*
+Se encuentra en el archivo* ./src/daos/fbConnect.json*  
+Actualmente usa la base de ejemplo del curso.
 
 ## End Points
 En el archivo *main.js*  se encuentra la configuración del puerto.
