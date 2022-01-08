@@ -8,6 +8,7 @@ const { Productos } = require('../models/productosMariaDB')
 const { sqlite3 } = require('./options')
 const { mysql } = require('./options')
 const { variosProductos } = require('../api/fakerApi')
+const { ProductosDaoMongoDb } = require('./daos/productos/ProductosDaoMongoDb.js')
 
 const app = express()
 const httpServer = new HTTPServer(app)
@@ -34,6 +35,7 @@ app.get('/api/productos-test', async (req, res) => {
     const listaProductos = await variosProductos(5)
     res.render('listaTest', { list: listaProductos })
 })
+
 
 
 /* --------------------------- Crea bases de datos -------------------------- */
