@@ -15,4 +15,8 @@ const sqlite3 = {
     useNullAsDefault: true
 }
 
-module.exports = { mysql, sqlite3 }
+
+const mongodb = "mongodb+srv://coderhouse:coderhouse@cluster0.o0eqf.mongodb.net/coderhouse?retryWrites=true&w=majority"
+
+
+module.exports = { mysql, sqlite3, mongodb }

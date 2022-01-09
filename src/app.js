@@ -3,10 +3,10 @@ const express = require('express')
 const exphbs = require('express-handlebars')
 const { Server: HTTPServer } = require('http')
 const { Server: SocketServer } = require('socket.io')
-const { Mensajes } = require('../models/mensajesSQL')
+const { Mensajes } = require('../models/mensajesMongoDb')
 const { Productos } = require('../models/productosMariaDB')
-const { sqlite3 } = require('./options')
 const { mysql } = require('./options')
+const { mongodb } = require('./options')
 const { variosProductos } = require('../api/fakerApi')
 
 const app = express()
@@ -59,15 +59,17 @@ const arrayProductos = [
     }
 ]
 
-const mensajes = new Mensajes(sqlite3)
+const mensajes = new Mensajes(mongodb)
 mensajes.crearTablaMensajes()
-    .then(() => {
-        return mensajes.insertarMensajes(arrayMensajes)
-    })
-    .then(() => console.log('Tabla Mensajes creada'))
-    .catch((err) => {
-        console.log(err)
-    })
+mensajes.insertarMensajes(arrayMensajes)
+mensajes.listarMensajes()
+// .then(() => {
+//     return mensajes.insertarMensajes(arrayMensajes)
+// })
+// .then(() => console.log('Tabla Mensajes creada'))
+// .catch((err) => {
+//     console.log(err)
+// })
 
 
 const productos = new Productos(mysql)
