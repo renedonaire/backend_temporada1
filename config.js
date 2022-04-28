@@ -8,7 +8,7 @@ export default {
         path: './storage'
     },
     mongodb: {
-        cnxStr: 'mongodb+srv://coderhouse:coderhouse@cluster0.o0eqf.mongodb.net/coderhouse?retryWrites=true&w=majority',
+        cnxStr: '',
         options: {
             useNewUrlParser: true,
             useUnifiedTopology: true,
