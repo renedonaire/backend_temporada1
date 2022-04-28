@@ -1,12 +1,12 @@
 {
     "type": "service_account",
     "project_id": "coderhouse-firestore-demo",
-    "private_key_id": "ef5387f65a3315bdf39f13354941e666287e1cb2",
-    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC5QpEAkf/ycvP8\nw4gZfisMlOjquVcvmYYCJrk4Pgx/x305gbFnuZW+LrgbxMluAL6gMk1ugG/ddPk8\nW5y7PUAENs0aVQ1DxMsi0XX7z2y/vFhv9sqMmXP5/tqxTQwK2rt7PbUrUT9SaVED\nqz2HECfoYXZlK1xH4iRHgWZFRTAXhU7RWvQN52Kp4NMgZgYjTonr/d1cZjTKS3rZ\nH8l6NuJ7w+ZdGESxmPwNEomRQyj8XbHsehAV7qwTKwXQb7Y8ct3f5pOJEl3YHIOl\nRcXbND+Gar0rSHsIf9pZo28vNdYR3lbzYTeaDkKCS/NTIfChZRK9BteCFJzP8lY3\nsA/+rFUlAgMBAAECggEAAIGJCdpcO5pKxk72aTNqBK/HbxSwg0XFEu5uJRQuTo8J\n7YVIKcNdAFb6U8EW18ESxDc+9OVO6Ojv4VVSuUQyj5BiwQaocZ3w/BhcXSK05lUq\nXKvs47NrmKw0hrVyKfls96o0e3jOVnhJK1xlX6AQq9bQTvhuWRfqB3P4Bopo1jea\nzYft1UbSVfKFEN4CdvzY0Jnhe3V9xmUQ/PN48DhSHAWQKNTDWmoMKpc3JFw/L5kD\nv88wcasLK8wM/giLEan13j9ndblX6Y8EJ7t4z8SNPYTpsk7YyOmXzuWKTlRN7AGQ\nM93J4DMaaUsvIkUajWIxGv7ax4KwSmIJ57FOKWwXhQKBgQDlo7AqcOZqfiFZKI+/\nEHGT8E3zkCtxbHuCWt97TCwMaOIR2HuGnJI+7h+gPqL+vRT87pj/acTrIn5m7Ili\nNX1eFlZgcRWjpzAE9lI0n7O5ynidRqcklxqEH/LuOItT5HL0aUvtHQvQUC0a2Z/U\n3wH7QFCWzJFZgHbW1iDxggAHwwKBgQDOhriRiufH4CfcGJ9018fKb/dNbHI0gzlB\naCPcNNKWqBZ8tsdiTDrTF0CF0Vq8WL18CWiRl3F98zel67b8fZ7tnNayMgL31BCo\nhJRl/A4Y8KSWR/cD1mW8f0TzkEBRG5BFUlG6DuqwjjrWZSVm3H7+6AgYJGWDkMya\n8EZjhlJI9wKBgCa0bi7ZFJ0CYVCLu56ygNI0gI76z7ewVyjjdCNt9UaqLuBfIoLP\nxP6CWCZEKGjTKcRv2q3CAAS5raBfYdCBv32qOijLJqCMv1U2xyhDeqFn9OhdTjKm\nnTuDvwhT03fyW0XCsZ9nc+RKfy+1WnEgnU7hyjOAi0cQlfcj5C2QgbzNAoGAKRO8\npB4XqbaY1vsCxC+i6k3Ix1p5gJ5VBgBbmZHcDOETz+xezdtRm+i1CaixPmL8FS6d\n4M9ZYG6+s76lX6TwtlwKi9jMpFRGl+3+wiYW+7jpU4aux9Gd3JcHtNYNJNSxpkgQ\nP0x2O3WemEP343SZwcOO0JZ0pm1ndK2zoln2BdMCgYEAimKIvl65uyLNXXby85Fl\n4zxQKE39vf8s9E3bRqVq0j01dRza4c/k6lEJwCRdzpSr74PoTTtf3xf5qckZt37q\nK1co/1rC5Pq3BmWJycddldULROXCSn//1j60H1St8KALm2UJZl+skXp8CYoTHmgG\no+jyf8MMsHqgMxoF3X8tBrk=\n-----END PRIVATE KEY-----\n",
-    "client_email": "firebase-adminsdk-3zzs1@coderhouse-firestore-demo.iam.gserviceaccount.com",
-    "client_id": "107069122714780695813",
-    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-    "token_uri": "https://oauth2.googleapis.com/token",
-    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-3zzs1%40coderhouse-firestore-demo.iam.gserviceaccount.com"
+    "private_key_id": "",
+    "private_key": "-----BEGIN PRIVATE KEY----------END PRIVATE KEY-----\n",
+    "client_email": "",
+    "client_id": "",
+    "auth_uri": "",
+    "token_uri": "",
+    "auth_provider_x509_cert_url": "",
+    "client_x509_cert_url": ""
 }
